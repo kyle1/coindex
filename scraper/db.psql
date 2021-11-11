@@ -1,0 +1,42 @@
+DROP TABLE IF EXISTS crypto;
+DROP TABLE IF EXISTS subreddit_stats;
+
+--Use Import feature to load asset table with records in crypto.csv
+CREATE TABLE IF NOT EXISTS asset (
+	asset_id		serial PRIMARY KEY,
+	asset_name		text NOT NULL,
+	ticker			text NOT NULL,
+	subreddit		text
+	--created_date	timestamp NOT NULL,
+	--modified_date	timestamp NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS subreddit_stats (
+	subreddit_stats_id	serial PRIMARY KEY,
+	crypto_id			int NOT NULL REFERENCES crypto (crypto_id),
+	subscribers			int NOT NULL,
+	stats_datetime		timestamp NOT NULL
+);
+
+
+
+CREATE TABLE IF NOT EXISTS asset (
+	asset_id		serial PRIMARY KEY,
+	asset_name		text NOT NULL,
+	ticker			text NOT NULL,
+	subreddit		text
+	--created_date	timestamp NOT NULL,
+	--modified_date	timestamp NOT NULL
+);
+
+
+
+CREATE TABLE IF NOT EXISTS crypto (
+	crypto_id		serial PRIMARY KEY,
+	crypto_name		text NOT NULL,
+	ticker			text NOT NULL,
+	subreddit		text
+	--created_date	timestamp NOT NULL,
+	--modified_date	timestamp NOT NULL
+);

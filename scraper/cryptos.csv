@@ -1,0 +1,10 @@
+crypto_id,crypto_name,ticker,subreddit
+1,Bitcoin,BTC,r/Bitcoin
+2,Ethereum,ETH,r/ethereum
+3,Solana,SOL,r/solana
+4,Cardano,ADA,r/cardano
+5,Polkadot,DOT,r/Polkadot
+6,Polygon,MATIC,r/maticnetwork
+7,Algorand,ALGO,r/AlgorandOfficial
+8,Crypto.com Coin,CRO,r/Crypto_com
+9,Loopring,LRC,r/loopringorg

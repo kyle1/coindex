@@ -1,0 +1,18 @@
+import React, { useEffect } from "react";
+
+const getCryptos = () => {
+  console.log("fetching cryptos...");
+};
+
+interface CryptosProps {}
+
+const Cryptos: React.FC<CryptosProps> = (props: CryptosProps) => {
+  console.log("Cryptos evaluated");
+
+  useEffect(() => {
+    getCryptos();
+  }, []);
+  return <div>Cryptos</div>;
+};
+
+export default Cryptos;
