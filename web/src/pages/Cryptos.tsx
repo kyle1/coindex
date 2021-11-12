@@ -12,7 +12,7 @@ const Cryptos: React.FC<CryptosProps> = (props: CryptosProps) => {
   useEffect(() => {
     getCryptos();
   }, []);
-  return <div>Cryptos</div>;
+  return <div>TODO</div>;
 };
 
 export default Cryptos;
