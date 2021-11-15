@@ -1,0 +1,11 @@
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Crypto.exe
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\appsettings.Development.json
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\appsettings.json
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Crypto.dll
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Crypto.deps.json
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Crypto.runtimeconfig.json
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Crypto.pdb
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Microsoft.OpenApi.dll
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Swashbuckle.AspNetCore.Swagger.dll
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\source\repos\creddit\backend\Crypto\bin\Debug\net5.0\publish\Swashbuckle.AspNetCore.SwaggerUI.dll
