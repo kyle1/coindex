@@ -95,11 +95,12 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         </div>
         <div className="navbar-pages">
           <NavLink to="/overview">Overview</NavLink>
+          <NavLink to="/tags">Tags</NavLink>
         </div>
         <div className="dropdown">
           {/* the css in forms.css is making this uppercase */}
           <button className="dropbtn">
-            Admin
+            Dropdown
             <i className="fa fa-caret-down" style={{ paddingLeft: "10px" }}></i>
           </button>
           <div className="dropdown-content">
