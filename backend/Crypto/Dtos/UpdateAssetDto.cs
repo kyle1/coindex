@@ -1,10 +1,13 @@
-namespace Crypto.Entities
+using System.ComponentModel.DataAnnotations;
+
+namespace Crypto.Dtos
 {
     //TODO: Look further into class vs record
-    public record Asset
+    public record UpdateAssetDto
     {
-        public int AssetId { get; init; }
+        [Required]
         public string AssetName { get; init; }
+        [Required]
         public string Ticker { get; init; }
     }
 }

@@ -8,5 +8,7 @@ namespace Crypto.Repositories
         Asset GetAsset(int id);
         IEnumerable<Asset> GetAssets();
         void CreateAsset(Asset asset);
+        void UpdateAsset(Asset asset);
+        void DeleteAsset(int id);
     }
 }
