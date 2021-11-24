@@ -27,5 +27,17 @@ namespace Crypto.Repositories
         {
             assets.Add(asset);
         }
+
+        public void UpdateAsset(Asset asset)
+        {
+            var index = assets.FindIndex(existingAsset => existingAsset.AssetId == asset.AssetId);
+            assets[index] = asset;
+        }
+
+        public void DeleteAsset(int id)
+        {
+            var index = assets.FindIndex(existingAsset => existingAsset.AssetId == id);
+            assets.RemoveAt(index);
+        }
     }
 }

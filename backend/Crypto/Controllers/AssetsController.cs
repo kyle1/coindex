@@ -53,5 +53,40 @@ namespace Crypto.Controllers
 
             return CreatedAtAction(nameof(GetAsset), new { id = asset.AssetId }, asset.AsDto());
         }
+        
+        [HttpPut("{id}")]
+        public ActionResult UpdateAsset(int id, UpdateAssetDto assetDto)
+        {
+            var existingAsset = repository.GetAsset(id);
+
+            if (existingAsset is null)
+            {
+                return NotFound();
+            }
+
+            Asset updatedAsset = existingAsset with {
+                AssetName = assetDto.AssetName,
+                Ticker = assetDto.Ticker
+            };
+
+            repository.UpdateAsset(updatedAsset);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteAsset(int id)
+        {
+            var existingAsset = repository.GetAsset(id);
+            
+            if (existingAsset is null)
+            {
+                return NotFound();
+            }
+
+            repository.DeleteAsset(id);
+
+            return NoContent();
+        }
     }
 }
