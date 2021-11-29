@@ -79,19 +79,20 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
       </DataTable> */}
       <DataTable
         value={assets}
-        className="p-datatable-striped editable-cells-table"
         editMode="cell"
+        className="editable-cells-table"
         filterDisplay="row"
-        paginator
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-        rows={20}
-        rowsPerPageOptions={[10, 20, 50]}
+        // paginator
+        // paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+        // currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+        // rows={20}
+        // rowsPerPageOptions={[10, 20, 50]}
       >
         <Column
           field="assetName"
           header="Asset"
           headerStyle={{ width: "300px" }}
+          filter
           sortable
           editor={(options) => cellEditor(options)}
           onCellEditComplete={handleCellEditComplete}
@@ -100,6 +101,7 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
           field="ticker"
           header="Ticker"
           headerStyle={{ width: "300px" }}
+          filter
           sortable
           editor={(options) => cellEditor(options)}
           onCellEditComplete={handleCellEditComplete}
@@ -108,6 +110,7 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
           field="subreddit"
           header="Subreddit"
           headerStyle={{ width: "300px" }}
+          filter
           sortable
           editor={(options) => cellEditor(options)}
           onCellEditComplete={handleCellEditComplete}
