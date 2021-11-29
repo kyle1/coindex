@@ -12,6 +12,8 @@ const TAGS: AssetTag[] = [
   { assetTagId: 3, tagName: "zkRollups", description: "desc3" },
   { assetTagId: 4, tagName: "NFT", description: "desc4" },
   { assetTagId: 5, tagName: "Privacy", description: "desc5" },
+  { assetTagId: 6, tagName: "Interoperability", description: "desc6" },
+  { assetTagId: 7, tagName: "Fiat bridge", description: "desc7" },
 ];
 
 const Container = styled.div`

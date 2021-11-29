@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 import styled from "styled-components";
 import { apiBaseUrl } from "../constants";
+import { Asset as AssetDto } from "../models/Asset";
 
 // const tags = [
 //   "Layer-1",
@@ -11,6 +12,14 @@ import { apiBaseUrl } from "../constants";
 // ];
 
 //for testing
+const asset: AssetDto = {
+  assetId: 3,
+  assetName: "Loopring",
+  ticker: "LRC",
+  website: "https://loopring.org/",
+  subreddit: "r/loopringorg",
+};
+
 const tags = [
   { tagId: 1, tagName: "Layer-1" },
   { tagId: 2, tagName: "Layer-2" },
@@ -65,15 +74,30 @@ const Asset: React.FC<AssetProps> = (props: AssetProps) => {
 
   return (
     <Container>
-      TODO:
+      <h3>
+        {asset.assetName} ({asset.ticker})
+      </h3>
+      <br />
+      <b>Website:</b> {asset.website}
+      <br />
+      <b>Subreddit:</b> {asset.subreddit}
       <br />
       <br />
-      Input fields for notes/ratings on different metrics (tx speed, tx cost, decentralization,
-      tokenomics, etc.)
+      Input fields for notes/ratings on different metrics:
+      <br />
+      <ul>
+        <li>Transaction speed</li>
+        <li>Transaction cost</li>
+        <li>Decentralization</li>
+        <li>Tokenomics</li>
+        <li>Team</li>
+        <li>Roadmap</li>
+        <li>Social Media Presence</li>
+        <li>Hype</li>
+      </ul>
       <br />
       <br />
-      Allow user to add related tags (e.g. "Layer-1", "Layer-2", "zkRollups", "NFT", etc.) -
-      PrimeReact AutoComplete (Multiple)
+      Asset tags
       <br />
       <AutoComplete
         value={selectedTags}
