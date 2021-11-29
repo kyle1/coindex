@@ -11,7 +11,19 @@ namespace Crypto
             {
                 AssetId = asset.AssetId,
                 AssetName = asset.AssetName,
-                Ticker = asset.Ticker
+                Ticker = asset.Ticker,
+                Website = asset.Website,
+                Subreddit = asset.Subreddit
+            };
+        }
+
+        public static AssetTagDto AsDto(this AssetTag tag)
+        {
+            return new AssetTagDto
+            {
+                AssetTagId = tag.AssetTagId,
+                TagName = tag.TagName,
+                Description = tag.Description
             };
         }
     }

@@ -9,5 +9,7 @@ namespace Crypto.Dtos
         public string AssetName { get; init; }
         [Required]
         public string Ticker { get; init; }
+        public string Website { get; init; }
+        public string Subreddit { get; init; }
     }
 }

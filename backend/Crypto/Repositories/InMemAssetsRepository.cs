@@ -4,13 +4,14 @@ using Crypto.Entities;
 
 namespace Crypto.Repositories
 {
-    public class InMemAssetsRepository : IAssetRepository
+    public class InMemAssetsRepository : IAssetsRepository
     {
         private readonly List<Asset> assets = new()
         {
-            new Asset { AssetId = 1, AssetName = "Bitcoin", Ticker = "BTC" },
-            new Asset { AssetId = 2, AssetName = "Ethereum", Ticker = "ETH" },
-            new Asset { AssetId = 3, AssetName = "Loopring", Ticker = "LRC" },
+            new Asset { AssetId = 1, AssetName = "Bitcoin", Ticker = "BTC", Website = "https://bitcoin.org", Subreddit = "r/Bitcoin" },
+            new Asset { AssetId = 2, AssetName = "Ethereum", Ticker = "ETH", Website = "https://ethereum.org", Subreddit = "r/ethereum" },
+            new Asset { AssetId = 3, AssetName = "Algorand", Ticker = "ALGO", Website = "https://www.algorand.com/", Subreddit = "r/AlgorandOfficial" },
+            new Asset { AssetId = 4, AssetName = "Loopring", Ticker = "LRC", Website = "https://loopring.org/", Subreddit = "r/loopringorg" },
         };
 
         public IEnumerable<Asset> GetAssets()

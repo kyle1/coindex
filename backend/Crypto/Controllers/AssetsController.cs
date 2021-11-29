@@ -11,9 +11,9 @@ namespace Crypto.Controllers
     [Route("assets")]
     public class AssetsController : ControllerBase
     {
-        private readonly IAssetRepository repository;
+        private readonly IAssetsRepository repository;
 
-        public AssetsController(IAssetRepository repository)
+        public AssetsController(IAssetsRepository repository)
         {
             this.repository = repository;
         }
@@ -46,7 +46,9 @@ namespace Crypto.Controllers
             {
                 AssetId = 1,
                 AssetName = assetDto.AssetName,
-                Ticker = assetDto.Ticker
+                Ticker = assetDto.Ticker,
+                Website = assetDto.Website,
+                Subreddit = assetDto.Subreddit
             };
 
             repository.CreateAsset(asset);
@@ -66,7 +68,9 @@ namespace Crypto.Controllers
 
             Asset updatedAsset = existingAsset with {
                 AssetName = assetDto.AssetName,
-                Ticker = assetDto.Ticker
+                Ticker = assetDto.Ticker,
+                Website = assetDto.Website,
+                Subreddit = assetDto.Subreddit
             };
 
             repository.UpdateAsset(updatedAsset);

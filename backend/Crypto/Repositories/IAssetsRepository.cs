@@ -3,7 +3,7 @@ using Crypto.Entities;
 
 namespace Crypto.Repositories
 {
-    public interface IAssetRepository
+    public interface IAssetsRepository
     {
         Asset GetAsset(int id);
         IEnumerable<Asset> GetAssets();
