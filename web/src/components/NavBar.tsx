@@ -95,7 +95,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         </div>
         <div className="navbar-pages">
           <NavLink to="/overview">Overview</NavLink>
-          <NavLink to="/tags">Tags</NavLink>
+          <NavLink to="/compare">Compare</NavLink>
         </div>
         <div className="dropdown">
           {/* the css in forms.css is making this uppercase */}
@@ -105,6 +105,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </button>
           <div className="dropdown-content">
             <NavLink to="/admin/assets">Assets</NavLink>
+            <NavLink to="/admin/tags">Tags</NavLink>
             <NavLink to="/test">Test Page</NavLink>
           </div>
         </div>

@@ -2,27 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import styled from "styled-components";
-import { apiBaseUrl } from "../constants";
-import { AssetTag } from "../models/AssetTag";
+import { apiBaseUrl } from "../../constants";
+import { AssetTag } from "../../models/AssetTag";
 
 //for testing
 const TAGS: AssetTag[] = [
-  { assetTagId: 1, tagName: "Layer-1", description: "desc1" },
-  { assetTagId: 2, tagName: "Layer-2", description: "desc2" },
-  { assetTagId: 3, tagName: "zkRollups", description: "desc3" },
-  { assetTagId: 4, tagName: "NFT", description: "desc4" },
-  { assetTagId: 5, tagName: "Privacy", description: "desc5" },
-  { assetTagId: 6, tagName: "Interoperability", description: "desc6" },
-  { assetTagId: 7, tagName: "Fiat bridge", description: "desc7" },
+  { assetTagId: 1, tagName: "Layer-1", description: "Layer-1" },
+  { assetTagId: 2, tagName: "Layer-2", description: "Layer-2" },
+  { assetTagId: 3, tagName: "Currency", description: "Currency" },
+  { assetTagId: 4, tagName: "zkRollups", description: "zkRollups" },
+  { assetTagId: 5, tagName: "NFT", description: "NFT" },
+  { assetTagId: 6, tagName: "Privacy", description: "Privacy" },
+  { assetTagId: 7, tagName: "Interoperability", description: "Interoperability" },
+  { assetTagId: 8, tagName: "Fiat bridge", description: "Fiat bridge" },
 ];
 
 const Container = styled.div`
   margin: 50px;
 `;
 
-interface AssetTagsProps {}
+interface AssetTagsMaintenanceProps {}
 
-const AssetTags: React.FC<AssetTagsProps> = (props: AssetTagsProps) => {
+const AssetTagsMaintenance: React.FC<AssetTagsMaintenanceProps> = (
+  props: AssetTagsMaintenanceProps
+) => {
   const [assetTags, setAssetTags] = useState<any>(null);
 
   const getTags = () => {
@@ -60,4 +63,4 @@ const AssetTags: React.FC<AssetTagsProps> = (props: AssetTagsProps) => {
   );
 };
 
-export default AssetTags;
+export default AssetTagsMaintenance;
