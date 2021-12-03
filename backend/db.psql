@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS asset (
 	asset_name		text NOT NULL,
 	ticker			text NOT NULL,
 	website			text,
-	subreddit		text
+	subreddit		text,
 	--created_date	timestamp NOT NULL,
 	--modified_date	timestamp NOT NULL
 );
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS asset_tag (
 	asset_tag_id			serial PRIMARY KEY,
 	tag_name				text NOT NULL,
 	description				text NOT NULL,
-	asset_tag_category_id	int NOT NULL REFERENCES asset_tag_category (asset_tag_category_id)
+	asset_tag_category_id	int NOT NULL REFERENCES asset_tag_category (asset_tag_category_id),
 	--created_date			timestamp NOT NULL,
 	--modified_date			timestamp NOT NULL
 );
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS asset_tag (
 
 CREATE TABLE IF NOT EXISTS asset_tag_xref (
 	asset_tag_xref_id		serial PRIMARY KEY,
-	asset_id				int NOT NULL REFERENCES asset (asset_id)
-	asset_tag_id			int NOT NULL REFERENCES asset_tag (asset_tag_id)
+	asset_id				int NOT NULL REFERENCES asset (asset_id),
+	asset_tag_id			int NOT NULL REFERENCES asset_tag (asset_tag_id),
 	--created_date			timestamp NOT NULL,
 	--modified_date			timestamp NOT NULL
 );
@@ -42,8 +42,24 @@ CREATE TABLE IF NOT EXISTS asset_tag_xref (
 
 CREATE TABLE IF NOT EXISTS asset_competitor (
 	asset_tag_xref_id		serial PRIMARY KEY,
-	asset_id				int NOT NULL REFERENCES asset (asset_id)
-	competitor_asset_id		int NOT NULL REFERENCES asset_tag (asset_tag_id)
+	asset_id				int NOT NULL REFERENCES asset (asset_id),
+	competitor_asset_id		int NOT NULL REFERENCES asset_tag (asset_tag_id),
+	--created_date			timestamp NOT NULL,
+	--modified_date			timestamp NOT NULL
+);
+
+
+--TODO: if the ability to tie multiple assets to one
+--event is needed, will need to make xref table.
+CREATE TABLE IF NOT EXISTS asset_event (
+	asset_tag_xref_id		serial PRIMARY KEY,
+	event_name				text NOT NULL,
+	asset_id				int NOT NULL REFERENCES asset (asset_id),
+	start_date				timestamp NOT NULL,
+	end_date				timestamp,
+	notes					text,
+	is_confirmed			boolean NOT NULL,
+	is_starred				boolean NOT NULL,
 	--created_date			timestamp NOT NULL,
 	--modified_date			timestamp NOT NULL
 );
@@ -62,7 +78,7 @@ CREATE TABLE IF NOT EXISTS post (
 	subreddit		text NOT NULL,
 	datetime		timestamp NOT NULL,
 	author			text NOT NULL,
-	title			text
+	title			text,
 	body			text
 );
 

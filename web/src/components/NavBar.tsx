@@ -95,6 +95,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         </div>
         <div className="navbar-pages">
           <NavLink to="/overview">Overview</NavLink>
+          <NavLink to="/events">Events</NavLink>
           <NavLink to="/compare">Compare</NavLink>
         </div>
         <div className="dropdown">

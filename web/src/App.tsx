@@ -5,6 +5,8 @@ import AssetTagsMaintenance from "./pages/admin/AssetTagsMaintenance";
 import AssetsMaintenance from "./pages/admin/AssetsMaintenance";
 import Asset from "./pages/Asset";
 import Compare from "./pages/Compare";
+import Events from "./pages/Events";
+import Home from "./pages/Home";
 import Overview from "./pages/Overview";
 
 function App() {
@@ -12,11 +14,12 @@ function App() {
     <BrowserRouter>
       <NavBar loggedIn={false} onLoginClick={() => {}} onLogoutClick={() => {}} />
       <Routes>
-        {/* <Route path="/" element={<Overview />} /> */}
-        <Route path="/" element={<Asset />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/events" element={<Events />} />
         <Route path="/compare" element={<Compare />} />
         <Route path="/admin/tags" element={<AssetTagsMaintenance />} />
         <Route path="/admin/assets" element={<AssetsMaintenance />} />
+        <Route path="/test" element={<Asset />} />
       </Routes>
     </BrowserRouter>
   );
