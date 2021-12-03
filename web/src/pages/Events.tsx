@@ -32,6 +32,7 @@ const dummyEvents: AssetEvent[] = [
     assetId: loopring.assetId,
     startDate: new Date(2021, 10, 29),
     endDate: new Date(2021, 10, 30),
+    notes: "https://www.algorand.com/resources/blog/whats-new-on-algorand-decipher-is-coming",
     isConfirmed: true,
     isStarred: true,
     asset: algorand,
@@ -96,8 +97,9 @@ const Events: React.FC<EventsProps> = (props: EventsProps) => {
         />
         <Column field="asset.assetName" header="Asset" headerStyle={{ width: "100px" }} sortable />
         <Column field="eventName" header="Event" headerStyle={{ width: "100px" }} sortable />
-        <Column field="isConfirmed" header="Confirmed" headerStyle={{ width: "100px" }} sortable />
-        <Column field="isStarred" header="Starred" headerStyle={{ width: "100px" }} sortable />
+        <Column field="notes" header="Notes" headerStyle={{ width: "100px" }} sortable />
+        <Column field="isConfirmed" header="Confirmed" headerStyle={{ width: "70px" }} sortable />
+        <Column field="isStarred" header="Starred" headerStyle={{ width: "70px" }} sortable />
       </DataTable>
     </Container>
   );
