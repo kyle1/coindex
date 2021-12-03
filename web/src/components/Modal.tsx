@@ -22,8 +22,8 @@ const Backdrop: React.FC<BackdropProps> = (props: BackdropProps) => {
 const StyledModalOverlay = styled.div`
   position: fixed;
   top: 10vh;
-  left: 15%;
-  width: 70%;
+  left: 25%;
+  width: 50%;
   background-color: rgb(18, 18, 18);
   /* padding: 1rem; */ /*TODO: make padding a prop? */
   border-radius: 14px;

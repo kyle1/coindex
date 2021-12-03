@@ -3,6 +3,7 @@ import { AutoComplete } from "primereact/autocomplete";
 import { Calendar } from "primereact/calendar";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { InputTextarea } from "primereact/inputtextarea";
 import { Asset } from "../../models/Asset";
 
 //for testing
@@ -84,14 +85,17 @@ const CreateEvent: React.FC<CreateEventProps> = (props: CreateEventProps) => {
       <br />
       <br />
       Event name*:
+      <br />
       <Input
         type="text"
         value={eventName}
-        style={{ width: "300px", marginLeft: "10px" }}
+        style={{ width: "300px" }}
         onChange={(e) => setEventName(e.target.value)}
       ></Input>
       <br />
+      <br />
       Asset*:
+      <br />
       <AutoComplete
         value={selectedAsset}
         suggestions={filteredAssets}
@@ -102,20 +106,31 @@ const CreateEvent: React.FC<CreateEventProps> = (props: CreateEventProps) => {
       <br />
       <br />
       Start Date*:
+      <br />
       <Calendar id="basic" value={startDate} onChange={(e) => setStartDate(e.value as Date)} />
       <br />
       <br />
       End Date:
+      <br />
       <Calendar id="basic" value={endDate} onChange={(e) => setStartDate(e.value as Date)} />
       <br />
       <br />
       Notes:
-      <Input
+      <br />
+      {/* <Input
         type="text"
         value={notes}
-        style={{ width: "300px", marginLeft: "10px" }}
+        style={{ width: "300px" }}
         onChange={(e) => setNotes(e.target.value)}
-      ></Input>
+      ></Input> */}
+      <InputTextarea
+        id="notes"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        required
+        rows={3}
+        cols={20}
+      />
       <br />
       <br />
       Confirmed
