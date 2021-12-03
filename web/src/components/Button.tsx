@@ -7,7 +7,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   console.log("Button evaluated.");
 
-  const [bgColor, setBgColor] = useState("#37c1d3");
+  const [bgColor, setBgColor] = useState("#2e9caa");
 
   const styles: any = {
     color: "black",

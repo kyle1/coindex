@@ -5,7 +5,7 @@ import AssetTagsMaintenance from "./pages/admin/AssetTagsMaintenance";
 import AssetsMaintenance from "./pages/admin/AssetsMaintenance";
 import Asset from "./pages/Asset";
 import Compare from "./pages/Compare";
-import Events from "./pages/Events";
+import Events from "./pages/events/Events";
 import Home from "./pages/Home";
 import Overview from "./pages/Overview";
 
