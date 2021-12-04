@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import styled from "styled-components";
+import CreateEvent from "./CreateEvent";
+import Button from "../../components/Button";
+import Modal from "../../components/Modal";
 import { Asset } from "../../models/Asset";
 import { AssetEvent } from "../../models/AssetEvent";
-import CreateEvent from "./CreateEvent";
-import Modal from "../../components/Modal";
 
 //for testing
 const algorand: Asset = {
@@ -83,7 +84,7 @@ const Events: React.FC<EventsProps> = (props: EventsProps) => {
       )}
       {!showCreateEvent && (
         <Container>
-          <button onClick={() => setShowCreateEvent(true)}>New</button>
+          <Button onClick={() => setShowCreateEvent(true)}>New</Button>
           <DataTable
             value={events}
             className="p-datatable-sm p-datatable-striped"

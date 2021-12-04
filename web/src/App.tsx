@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AssetTagsMaintenance from "./pages/admin/AssetTagsMaintenance";
-import AssetsMaintenance from "./pages/admin/AssetsMaintenance";
+import AssetsMaintenance from "./pages/assets/AssetsMaintenance";
 import Asset from "./pages/Asset";
 import Compare from "./pages/Compare";
 import Events from "./pages/events/Events";
