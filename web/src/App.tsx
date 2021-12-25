@@ -5,9 +5,11 @@ import AssetTagsMaintenance from "./pages/admin/AssetTagsMaintenance";
 import AssetsMaintenance from "./pages/assets/AssetsMaintenance";
 import Asset from "./pages/Asset";
 import Compare from "./pages/Compare";
+import Dash from "./pages/dash/Dash";
 import Events from "./pages/events/Events";
 import Home from "./pages/Home";
 import Overview from "./pages/Overview";
+import Portfolio from "./pages/portfolio/Portfolio";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <NavBar loggedIn={false} onLoginClick={() => {}} onLogoutClick={() => {}} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dash" element={<Dash />} />
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/events" element={<Events />} />
         <Route path="/compare" element={<Compare />} />
         <Route path="/admin/tags" element={<AssetTagsMaintenance />} />

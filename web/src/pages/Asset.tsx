@@ -189,17 +189,45 @@ const Asset: React.FC<AssetProps> = (props: AssetProps) => {
       <div>*TODO: Allow notes. Link to other competitor assets.</div>
       <br />
       <br />
+      Research ideas:
+      https://ren-heinrich.medium.com/how-to-research-crypto-projects-a-step-by-step-guide-744fdc822b99
+      <br />
       Input fields for notes/ratings on different metrics:
       <br />
       <ul>
+        <li>Purpose</li>
         <li>Transaction speed</li>
         <li>Transaction cost</li>
-        <li>Decentralization</li>
+        <li>Decentralization/security</li>
         <li>Tokenomics</li>
+        <li>Website</li>
+        <li>Whitepaper</li>
+        <li>App(s)?</li>
         <li>Team</li>
-        <li>Roadmap</li>
-        <li>Social Media Presence</li>
-        <li>Hype</li>
+        <li>Roadmap (what's coming up? has team shown ability to meet their goals on schedule?)</li>
+        <ul>
+          <li>Separate page will track upcoming events/goals for all assets.</li>
+        </ul>
+        <li>On-chain data (# of active addresses, # new addresses, transaction volume, etc.)</li>
+        <li>Barriers to entry/Ease of use</li>
+        <li>Staking/reward incentives</li>
+        <li>Total value locked (higher TVL =&gt; lower downside?)</li>
+        <li>Partnerships/funding</li>
+        <li>Exchange listings</li>
+        <li>Volume (high volume can lead to new exchange listings)</li>
+        <li>Development activity (open source? regular contributions? most recent code update?)</li>
+        <li>
+          Developer adoption/adoptability (are developers interested in building on the platform?
+          which programming languages are supported? good developer docs?)
+        </li>
+        <li>Marketing</li>
+        <li>Social media presence &amp; following</li>
+        <li>General sentiment (what are people saying?)</li>
+        <li>
+          Analysts to track (article writers, reddit posters, etc. who are dialed-in to project)
+        </li>
+        <li>Useful links (relevant websites, news articles, reddit posts/comments, etc.)</li>
+        <li>Competitors/similar coins</li>
       </ul>
       <br />
       <br />
