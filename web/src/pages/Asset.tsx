@@ -196,6 +196,8 @@ const Asset: React.FC<AssetProps> = (props: AssetProps) => {
       <br />
       <ul>
         <li>Purpose</li>
+        <li>Throughput</li>
+        <li>Scalability</li>
         <li>Transaction speed</li>
         <li>Transaction cost</li>
         <li>Decentralization/security</li>
@@ -210,6 +212,7 @@ const Asset: React.FC<AssetProps> = (props: AssetProps) => {
         </ul>
         <li>On-chain data (# of active addresses, # new addresses, transaction volume, etc.)</li>
         <li>Barriers to entry/Ease of use</li>
+        <li>Number of tokens/dApps</li>
         <li>Staking/reward incentives</li>
         <li>Total value locked (higher TVL =&gt; lower downside?)</li>
         <li>Partnerships/funding</li>

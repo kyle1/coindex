@@ -18,6 +18,8 @@ const Portfolio: React.FC<PortfolioProps> = (props: PortfolioProps) => {
         <li>Price</li>
         <li>Market cap</li>
         <li>24h % change</li>
+        <li>Price target</li>
+        <li>Why you bought? Why sell?</li>
         <li>Conviction rating</li>
         <li>TODO: Look at RK portfolio spreadsheet for ideas</li>
       </ul>
