@@ -2,20 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import styled from "styled-components";
-import { apiBaseUrl } from "../../constants";
-import { AssetTag } from "../../models/AssetTag";
-
-//for testing
-const TAGS: AssetTag[] = [
-  { assetTagId: 1, tagName: "Layer-1", description: "Layer-1" },
-  { assetTagId: 2, tagName: "Layer-2", description: "Layer-2" },
-  { assetTagId: 3, tagName: "Currency", description: "Currency" },
-  { assetTagId: 4, tagName: "zkRollups", description: "zkRollups" },
-  { assetTagId: 5, tagName: "NFT", description: "NFT" },
-  { assetTagId: 6, tagName: "Privacy", description: "Privacy" },
-  { assetTagId: 7, tagName: "Interoperability", description: "Interoperability" },
-  { assetTagId: 8, tagName: "Fiat bridge", description: "Fiat bridge" },
-];
+// import { apiBaseUrl } from "../../constants";
+import { tags } from "../../testData";
 
 const Container = styled.div`
   margin: 50px;
@@ -35,7 +23,7 @@ const AssetTagsMaintenance: React.FC<AssetTagsMaintenanceProps> = (
     //     (tags) => setAssetTags(tags),
     //     (error) => console.log(error)
     //   );
-    setAssetTags(TAGS); //for testing
+    setAssetTags(tags); //for testing
   };
 
   useEffect(() => getTags(), []);

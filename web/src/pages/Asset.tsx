@@ -4,74 +4,7 @@ import styled from "styled-components";
 import { apiBaseUrl } from "../constants";
 import { Asset as AssetDto } from "../models/Asset";
 import { AssetTag } from "../models/AssetTag";
-
-//for testing
-const tags: AssetTag[] = [
-  { assetTagId: 1, tagName: "Layer-1", description: "Layer-1" },
-  { assetTagId: 2, tagName: "Layer-2", description: "Layer-2" },
-  { assetTagId: 3, tagName: "Currency", description: "Currency" },
-  { assetTagId: 4, tagName: "zkRollups", description: "zkRollups" },
-  { assetTagId: 5, tagName: "NFT", description: "NFT" },
-  { assetTagId: 6, tagName: "Privacy", description: "Privacy" },
-  { assetTagId: 7, tagName: "Interoperability", description: "Interoperability" },
-  { assetTagId: 8, tagName: "Fiat bridge", description: "Fiat bridge" },
-];
-
-//for testing
-const assets: AssetDto[] = [
-  {
-    assetId: 1,
-    assetName: "Bitcoin",
-    ticker: "BTC",
-    website: "https://bitcoin.org",
-    subreddit: "r/bitcoin",
-    mentions: 1536,
-  },
-  {
-    assetId: 2,
-    assetName: "Ethereum",
-    ticker: "ETH",
-    website: "https://ethereum.org",
-    subreddit: "r/ethereum",
-    mentions: 1324,
-  },
-  {
-    assetId: 3,
-    assetName: "Cardano",
-    ticker: "ADA",
-    website: "https://cardano.org/",
-    subreddit: "r/cardano",
-    mentions: 1,
-  },
-  {
-    assetId: 4,
-    assetName: "Algorand",
-    ticker: "ALGO",
-    website: "https://www.algorand.com/",
-    subreddit: "r/AlgorandOfficial",
-    mentions: 1337,
-  },
-  {
-    assetId: 5,
-    assetName: "Loopring",
-    ticker: "LRC",
-    website: "https://loopring.org",
-    subreddit: "r/loopringorg",
-    mentions: 934,
-  },
-];
-
-//for testing
-const asset: AssetDto = {
-  assetId: 4,
-  assetName: "Algorand",
-  ticker: "ALGO",
-  website: "https://www.algorand.com/",
-  subreddit: "r/AlgorandOfficial",
-  mentions: 1337,
-  tags: [tags[0], tags[2]],
-  competitors: [assets[1], assets[2]],
-};
+import { assets, tags } from "../testData";
 
 const Container = styled.div`
   margin: 50px;
@@ -86,6 +19,8 @@ interface AssetProps {}
 
 const Asset: React.FC<AssetProps> = (props: AssetProps) => {
   console.log("Asset evaluated");
+  let asset = assets[3];
+
   const [filteredTags, setFilteredTags] = useState<any>(null);
   const [selectedTags, setSelectedTags] = useState<AssetTag[]>(asset.tags!);
   const [filteredCompetitors, setFilteredCompetitors] = useState<any>(null);
@@ -205,7 +140,7 @@ const Asset: React.FC<AssetProps> = (props: AssetProps) => {
         <li>Website</li>
         <li>Whitepaper</li>
         <li>App(s)?</li>
-        <li>Team</li>
+        <li>Team (size? experience?)</li>
         <li>Roadmap (what's coming up? has team shown ability to meet their goals on schedule?)</li>
         <ul>
           <li>Separate page will track upcoming events/goals for all assets.</li>

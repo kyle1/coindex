@@ -6,8 +6,9 @@ import styled from "styled-components";
 // import CreateAsset from "./CreateAsset";
 import Button from "../../components/Button";
 // import Modal from "../../components/Modal";
-import { apiBaseUrl } from "../../constants";
+// import { apiBaseUrl } from "../../constants";
 import { Asset } from "../../models/Asset";
+import { assets as testAssets } from "../../testData";
 
 const Container = styled.div`
   margin: 50px;
@@ -58,49 +59,9 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
     //     (assets) => setAssets(assets),
     //     (error) => console.log(error)
     //   );
+
     //for testing
-    const assets: Asset[] = [
-      {
-        assetId: 1,
-        assetName: "Bitcoin",
-        ticker: "BTC",
-        website: "https://bitcoin.org",
-        subreddit: "r/bitcoin",
-        mentions: 1536,
-      },
-      {
-        assetId: 2,
-        assetName: "Ethereum",
-        ticker: "ETH",
-        website: "https://ethereum.org",
-        subreddit: "r/ethereum",
-        mentions: 1324,
-      },
-      {
-        assetId: 3,
-        assetName: "Cardano",
-        ticker: "ADA",
-        website: "https://cardano.org/",
-        subreddit: "r/cardano",
-        mentions: 1,
-      },
-      {
-        assetId: 4,
-        assetName: "Algorand",
-        ticker: "ALGO",
-        website: "https://www.algorand.com/",
-        subreddit: "r/AlgorandOfficial",
-        mentions: 1337,
-      },
-      {
-        assetId: 5,
-        assetName: "Loopring",
-        ticker: "LRC",
-        website: "https://loopring.org",
-        subreddit: "r/loopringorg",
-        mentions: 934,
-      },
-    ];
+    const assets: Asset[] = testAssets;
     setAssets(assets);
   };
 

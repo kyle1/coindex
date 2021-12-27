@@ -5,60 +5,8 @@ import styled from "styled-components";
 import CreateEvent from "./CreateEvent";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
-import { Asset } from "../../models/Asset";
 import { AssetEvent } from "../../models/AssetEvent";
-
-//for testing
-const algorand: Asset = {
-  assetId: 4,
-  assetName: "Algorand",
-  ticker: "ALGO",
-  website: "https://www.algorand.com/",
-  subreddit: "r/AlgorandOfficial",
-  mentions: 1337,
-};
-
-const loopring: Asset = {
-  assetId: 5,
-  assetName: "Loopring",
-  ticker: "LRC",
-  website: "https://loopring.org",
-  subreddit: "r/loopringorg",
-  mentions: 934,
-};
-
-//for testing
-const dummyEvents: AssetEvent[] = [
-  {
-    assetEventId: 1,
-    eventName: "Decipher",
-    assetId: loopring.assetId,
-    startDate: new Date(2021, 10, 29),
-    endDate: new Date(2021, 10, 30),
-    notes: "https://www.algorand.com/resources/blog/whats-new-on-algorand-decipher-is-coming",
-    isConfirmed: true,
-    isStarred: true,
-    asset: algorand,
-  },
-  {
-    assetEventId: 2,
-    eventName: "Counterfactual wallet release",
-    assetId: loopring.assetId,
-    startDate: new Date(),
-    isConfirmed: true,
-    isStarred: false,
-    asset: loopring,
-  },
-  {
-    assetEventId: 3,
-    eventName: "GameStop marketplace release",
-    assetId: loopring.assetId,
-    startDate: new Date(2021, 11, 6),
-    isConfirmed: false,
-    isStarred: true,
-    asset: loopring,
-  },
-];
+import { events as testEvents } from "../../testData";
 
 const Container = styled.div`
   margin: 50px;
@@ -68,7 +16,7 @@ interface EventsProps {}
 
 const Events: React.FC<EventsProps> = (props: EventsProps) => {
   const [showCreateEvent, setShowCreateEvent] = useState<boolean>(false);
-  const [events, setEvents] = useState<AssetEvent[]>(dummyEvents);
+  const [events, setEvents] = useState<AssetEvent[]>(testEvents);
 
   const startDateTemplate = (event: AssetEvent): JSX.Element => (
     <>{event.startDate.toDateString()}</>

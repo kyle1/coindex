@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { AutoComplete } from "primereact/autocomplete";
-import { Calendar } from "primereact/calendar";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { InputTextarea } from "primereact/inputtextarea";
-import { Asset } from "../../models/Asset";
 
 interface CreateAssetProps {}
 
