@@ -79,6 +79,7 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
           <Button onClick={() => setShowCreateAsset(true)}>New</Button>
           <DataTable
             value={assets}
+            size="small"
             editMode="cell"
             className="editable-cells-table"
             filterDisplay="row"

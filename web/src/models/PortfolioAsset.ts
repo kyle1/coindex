@@ -9,4 +9,6 @@ export interface PortfolioAsset {
   buyReason?: string;
   sellReason?: string;
   convictionRating?: number;
+  holdLength?: string;
+  notes?: string;
 }

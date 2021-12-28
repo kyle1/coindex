@@ -35,7 +35,7 @@ const Events: React.FC<EventsProps> = (props: EventsProps) => {
           <Button onClick={() => setShowCreateEvent(true)}>New</Button>
           <DataTable
             value={events}
-            className="p-datatable-sm p-datatable-striped"
+            size="small"
             paginator
             paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
@@ -63,7 +63,7 @@ const Events: React.FC<EventsProps> = (props: EventsProps) => {
               sortable
             />
             <Column field="eventName" header="Event" headerStyle={{ width: "100px" }} sortable />
-            <Column field="notes" header="Notes" headerStyle={{ width: "100px" }} sortable />
+            {/* <Column field="notes" header="Notes" headerStyle={{ width: "100px" }} sortable /> */}
             <Column
               field="isConfirmed"
               header="Confirmed"

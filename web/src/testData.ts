@@ -22,6 +22,11 @@ const assets: Asset[] = [
     website: "https://bitcoin.org",
     subreddit: "r/bitcoin",
     mentions: 1536,
+    marketCap: 1000000000000,
+    price: 51000,
+    pctChange1d: -0.53,
+    pctChange7d: 2.75,
+    pctChange30d: 1.34,
     tags: [tags[0]],
     competitors: [],
   },
@@ -32,6 +37,11 @@ const assets: Asset[] = [
     website: "https://ethereum.org",
     subreddit: "r/ethereum",
     mentions: 1324,
+    marketCap: 400000000000,
+    price: 4100,
+    pctChange1d: -1.13,
+    pctChange7d: 1.45,
+    pctChange30d: 0.45,
     tags: [tags[0]],
     competitors: [],
   },
@@ -42,6 +52,11 @@ const assets: Asset[] = [
     website: "https://cardano.org/",
     subreddit: "r/cardano",
     mentions: 1,
+    marketCap: 50000000000,
+    price: 1.9,
+    pctChange1d: -1.33,
+    pctChange7d: -2.54,
+    pctChange30d: -4.15,
     tags: [tags[0]],
     competitors: [],
   },
@@ -52,6 +67,11 @@ const assets: Asset[] = [
     website: "https://www.algorand.com/",
     subreddit: "r/AlgorandOfficial",
     mentions: 1337,
+    marketCap: 10000000000,
+    price: 1.7,
+    pctChange1d: 1.13,
+    pctChange7d: 2.75,
+    pctChange30d: 3.14,
     tags: [tags[0]],
     competitors: [],
   },
@@ -62,6 +82,11 @@ const assets: Asset[] = [
     website: "https://loopring.org",
     subreddit: "r/loopringorg",
     mentions: 934,
+    marketCap: 3000000000,
+    price: 2.38,
+    pctChange1d: 1.53,
+    pctChange7d: 2.84,
+    pctChange30d: 3.56,
     tags: [tags[1], tags[3]],
     competitors: [],
   },
@@ -72,10 +97,24 @@ assets[2].competitors = [assets[1], assets[3]];
 assets[3].competitors = [assets[1], assets[2]];
 
 const portfolioAssets: PortfolioAsset[] = [
-  { asset: assets[0], quantity: 1, percentageOfPortfolio: 35 },
-  { asset: assets[1], quantity: 4.8, percentageOfPortfolio: 25 },
-  { asset: assets[4], quantity: 15000, percentageOfPortfolio: 30 },
+  { asset: assets[0], quantity: 1, convictionRating: 10, holdLength: "long", notes: "blue chip" },
+  { asset: assets[1], quantity: 4.8, convictionRating: 8, holdLength: "long", notes: "blue chip" },
+  {
+    asset: assets[4],
+    quantity: 15000,
+    convictionRating: 7,
+    holdLength: "short/long",
+    notes: "trim after GameStop partnership announcment",
+  },
 ];
+
+const totalValue = portfolioAssets.reduce(function (accumulator, item) {
+  return accumulator + item.quantity * item.asset.price!;
+}, 0);
+
+portfolioAssets.forEach((p) => {
+  p.percentageOfPortfolio = ((p.quantity * p.asset.price!) / totalValue) * 100;
+});
 
 const events: AssetEvent[] = [
   {
