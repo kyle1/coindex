@@ -87,7 +87,8 @@ const Portfolio: React.FC<PortfolioProps> = (props: PortfolioProps) => {
         value={portfolioAssets}
         // editMode="cell"
         //className="editable-cells-table"
-        size="small"
+        className="p-datatable-sm"
+        //size="small"
         // filterDisplay="row"
         // paginator
         // paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
@@ -121,7 +122,7 @@ const Portfolio: React.FC<PortfolioProps> = (props: PortfolioProps) => {
         <Column
           field="asset.marketCap"
           header="Market Cap"
-          headerStyle={{ width: "100px" }}
+          headerStyle={{ width: "120px" }}
           //filter
           sortable
           body={marketCapTemplate}

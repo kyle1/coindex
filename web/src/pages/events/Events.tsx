@@ -35,7 +35,8 @@ const Events: React.FC<EventsProps> = (props: EventsProps) => {
           <Button onClick={() => setShowCreateEvent(true)}>New</Button>
           <DataTable
             value={events}
-            size="small"
+            //size="small"
+            className="p-datatable-sm"
             paginator
             paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"

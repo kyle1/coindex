@@ -32,7 +32,8 @@ const AssetTagsMaintenance: React.FC<AssetTagsMaintenanceProps> = (
     <Container>
       <DataTable
         value={assetTags}
-        size="small"
+        //size="small"
+        className="p-datatable-sm"
         paginator
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"

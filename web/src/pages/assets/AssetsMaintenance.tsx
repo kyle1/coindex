@@ -79,10 +79,10 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
           <Button onClick={() => setShowCreateAsset(true)}>New</Button>
           <DataTable
             value={assets}
-            size="small"
+            className="p-datatable-sm editable-cells-table"
+            //size="small"
             editMode="cell"
-            className="editable-cells-table"
-            filterDisplay="row"
+            //filterDisplay="row"
             // paginator
             // paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
             // currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
