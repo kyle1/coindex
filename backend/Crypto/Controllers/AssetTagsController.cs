@@ -64,12 +64,12 @@ namespace Crypto.Controllers
                 return NotFound();
             }
 
-            AssetTag updatedTag = existingTag with {
-                TagName = tagDto.TagName,
-                Description = tagDto.Description
-            };
+            // AssetTag updatedTag = existingTag with {
+            //     TagName = tagDto.TagName,
+            //     Description = tagDto.Description
+            // };
 
-            repository.UpdateAssetTag(updatedTag);
+            // repository.UpdateAssetTag(updatedTag);
 
             return NoContent();
         }

@@ -1,11 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
 namespace Crypto.Entities
 {
-    //TODO: Look further into class vs record
-    public record AssetTag
+    public partial class AssetTag
     {
-        public int AssetTagId { get; init; }
-        public string TagName { get; init; }
-        public string Description { get; init; }
-        public int AssetTagCategoryId { get; init; }
+        public AssetTag()
+        {
+            AssetCompetitors = new HashSet<AssetCompetitor>();
+            AssetTagXrefs = new HashSet<AssetTagXref>();
+        }
+
+        public int AssetTagId { get; set; }
+        public string TagName { get; set; }
+        public string Description { get; set; }
+        public int? AssetTagCategoryId { get; set; }
+
+        public virtual AssetTagCategory AssetTagCategory { get; set; }
+        public virtual ICollection<AssetCompetitor> AssetCompetitors { get; set; }
+        public virtual ICollection<AssetTagXref> AssetTagXrefs { get; set; }
     }
 }

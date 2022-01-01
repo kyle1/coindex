@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import styled from "styled-components";
-// import { apiBaseUrl } from "../../constants";
-import { tags } from "../../testData";
+import { apiBaseUrl } from "../../constants";
 
 const Container = styled.div`
   margin: 50px;
@@ -17,13 +16,12 @@ const AssetTagsMaintenance: React.FC<AssetTagsMaintenanceProps> = (
   const [assetTags, setAssetTags] = useState<any>(null);
 
   const getTags = () => {
-    // fetch(`${apiBaseUrl}/assets/tags`)
-    //   .then((response) => response.json())
-    //   .then(
-    //     (tags) => setAssetTags(tags),
-    //     (error) => console.log(error)
-    //   );
-    setAssetTags(tags); //for testing
+    fetch(`${apiBaseUrl}/tags`)
+      .then((response) => response.json())
+      .then(
+        (tags) => setAssetTags(tags),
+        (error) => console.log(error)
+      );
   };
 
   useEffect(() => getTags(), []);

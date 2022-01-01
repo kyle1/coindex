@@ -1,3 +1,4 @@
+import { AssetSection } from "./AssetSection";
 import { AssetTag } from "./AssetTag";
 
 export interface Asset {
@@ -6,6 +7,15 @@ export interface Asset {
   ticker: string;
   website?: string;
   subreddit?: string;
+
+  marketCapRank?: number;
+  currentPrice?: number;
+  priceChangePercentage1h?: number;
+  priceChangePercentage24h?: number;
+  priceChangePercentage7d?: number;
+  priceChangePercentage30d?: number;
+  priceChangePercentage1y?: number;
+
   transactionsPerSecond?: string;
   mentions?: number;
   marketCap?: number;
@@ -15,4 +25,5 @@ export interface Asset {
   pctChange30d?: number;
   tags?: AssetTag[];
   competitors?: Asset[];
+  sections: AssetSection[];
 }

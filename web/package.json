@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "primeicons": "^5.0.0",
     "primereact": "^6.6.0",
     "react": "^17.0.0",

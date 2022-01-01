@@ -21,9 +21,29 @@ namespace Crypto.Controllers
         [HttpGet]
         public IEnumerable<AssetDto> GetAssets()
         {
-            var assets = repository.GetAssets().Select(asset => asset.AsDto());
+            var assets = repository.GetAssets().Select(asset => asset.AsDto()).ToList();
 
-            return assets;
+            var coins = repository.GetCoinGeckoCoins();
+
+            foreach (var asset in assets)
+            {
+                var coin = coins.SingleOrDefault(x => x.symbol.ToUpper() == asset.Ticker.ToUpper());
+
+                if (coin != null)
+                {
+                    asset.CurrentPrice = coin.current_price;
+                    asset.MarketCap = coin.market_cap;
+                    asset.MarketCapRank = coin.market_cap_rank;
+                    asset.TotalVolume = coin.total_volume;
+                    asset.PriceChangePercentage1h = coin.price_change_percentage_1h_in_currency;
+                    asset.PriceChangePercentage24h = coin.price_change_percentage_24h_in_currency;
+                    asset.PriceChangePercentage7d = coin.price_change_percentage_7d_in_currency;
+                    asset.PriceChangePercentage30d = coin.price_change_percentage_30d_in_currency;
+                    asset.PriceChangePercentage1y = coin.price_change_percentage_1y_in_currency;
+                }
+            }
+
+            return assets.OrderBy(x => x.MarketCapRank);
         }
 
         [HttpGet("{id}")]
@@ -66,14 +86,14 @@ namespace Crypto.Controllers
                 return NotFound();
             }
 
-            Asset updatedAsset = existingAsset with {
-                AssetName = assetDto.AssetName,
-                Ticker = assetDto.Ticker,
-                Website = assetDto.Website,
-                Subreddit = assetDto.Subreddit
-            };
+            // Asset updatedAsset = existingAsset with {
+            //     AssetName = assetDto.AssetName,
+            //     Ticker = assetDto.Ticker,
+            //     Website = assetDto.Website,
+            //     Subreddit = assetDto.Subreddit
+            // };
 
-            repository.UpdateAsset(updatedAsset);
+            // repository.UpdateAsset(updatedAsset);
 
             return NoContent();
         }

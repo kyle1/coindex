@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS asset_tag_xref (
 CREATE TABLE IF NOT EXISTS portfolio_asset (
 	portfolio_asset_id		serial PRIMARY KEY,
 	asset_id				int NOT NULL REFERENCES asset (asset_id),
-	quantity				numeric NOT NULL
+	quantity				numeric NOT NULL,
 	price_target			numeric,
 	buy_reason				text,
 	sell_reason				text,
@@ -75,6 +75,17 @@ CREATE TABLE IF NOT EXISTS asset_event (
 	notes					text,
 	is_confirmed			boolean NOT NULL,
 	is_starred				boolean NOT NULL
+	--created_date			timestamp NOT NULL,
+	--modified_date			timestamp NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS asset_section (
+	asset_section_id		serial PRIMARY KEY,
+	asset_id				int NOT NULL REFERENCES asset (asset_id),
+	title					text NOT NULL,
+	body					text NOT NULL,
+	sort_order				int NOT NULL
 	--created_date			timestamp NOT NULL,
 	--modified_date			timestamp NOT NULL
 );

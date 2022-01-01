@@ -50,7 +50,8 @@ namespace Crypto
                 });
             });
 
-            services.AddSingleton<IAssetsRepository, InMemAssetsRepository>();
+            // services.AddSingleton<IAssetsRepository, InMemAssetsRepository>();
+            services.AddSingleton<IAssetsRepository, AssetsRepository>();
             services.AddSingleton<IAssetTagsRepository, AssetTagsRepository>();
             
             services.AddControllers();

@@ -94,7 +94,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </NavLink>
         </div>
         <div className="navbar-pages">
-          <NavLink to="/dash">Dashboard</NavLink>
+          <NavLink to="/coins">Coins</NavLink>
           <NavLink to="/portfolio">Portfolio</NavLink>
           <NavLink to="/movers">Movers</NavLink>
           <NavLink to="/events">Events</NavLink>

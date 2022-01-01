@@ -4,7 +4,7 @@ using Crypto.Entities;
 
 namespace Crypto.Repositories
 {
-    public class InMemAssetsRepository : IAssetsRepository
+    public class InMemAssetsRepository //: IAssetsRepository
     {
         private readonly List<Asset> assets = new()
         {
