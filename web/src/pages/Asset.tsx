@@ -149,7 +149,13 @@ const Asset: React.FC<AssetProps> = (props: AssetProps) => {
         <li>Barriers to entry/Ease of use</li>
         <li>Number of tokens/dApps</li>
         <li>Staking/reward incentives</li>
-        <li>Total value locked (higher TVL =&gt; lower downside?)</li>
+        <li>
+          Total value locked (see:
+          <a href="https://defillama.com/chains" target="_blank">
+            DefiLlama
+          </a>
+          )
+        </li>
         <li>Partnerships/funding</li>
         <li>Exchange listings</li>
         <li>Volume (high volume can lead to new exchange listings)</li>

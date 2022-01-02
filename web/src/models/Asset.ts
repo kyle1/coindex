@@ -1,3 +1,4 @@
+import { AssetLink } from "./AssetLink";
 import { AssetSection } from "./AssetSection";
 import { AssetTag } from "./AssetTag";
 
@@ -16,14 +17,15 @@ export interface Asset {
   priceChangePercentage30d?: number;
   priceChangePercentage1y?: number;
 
-  transactionsPerSecond?: string;
-  mentions?: number;
+  //transactionsPerSecond?: string;
+  //mentions?: number;
   marketCap?: number;
-  price?: number;
-  pctChange1d?: number;
-  pctChange7d?: number;
-  pctChange30d?: number;
+  //price?: number;
+  // pctChange1d?: number;
+  // pctChange7d?: number;
+  // pctChange30d?: number;
   tags?: AssetTag[];
   competitors?: Asset[];
   sections: AssetSection[];
+  links: AssetLink[];
 }

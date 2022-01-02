@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Crypto.Dtos;
 using Crypto.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,14 @@ namespace Crypto.Controllers
         public AssetSectionsController(IAssetSectionsRepository repository)
         {
             this.repository = repository;
+        }
+
+        [HttpGet("categories")]
+        public ActionResult<List<SectionCategoryDto>> GetSectionCategories()
+        {
+            var categories = repository.GetSectionCategories();
+            var categoryDtos = categories.Select(x => x.AsDto()).ToList();
+            return categoryDtos;
         }
         
         [HttpPost]

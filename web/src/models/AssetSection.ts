@@ -1,6 +1,7 @@
+import { SectionCategory } from "./SectionCategory";
+
 export interface AssetSection {
   assetSectionId: number;
-  title: string;
+  sectionCategory: SectionCategory;
   body: string;
-  sortOrder: number;
 }

@@ -135,7 +135,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
             {asset.sections.map((section) => (
               <>
                 <div style={{ fontWeight: "bold" }}>
-                  {section.title}
+                  {section.sectionCategory.title}
                   <i
                     className="fas fa-pencil-alt"
                     style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
@@ -145,6 +145,14 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
                 <div>{section.body}</div>
                 <br />
               </>
+            ))}
+            <br />
+            <br />
+            {asset.links.length > 0 && <div style={{ fontWeight: "bold" }}>Links</div>}
+            {asset.links.map((link) => (
+              <a href={link.url} target="_blank" style={{ textDecoration: "none", color: "white" }}>
+                {link.description}
+              </a>
             ))}
           </>
         )}

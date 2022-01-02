@@ -4,8 +4,9 @@ namespace Crypto.Dtos
     public record AssetSectionDto
     {
         public int AssetSectionId { get; init; }
-        public string Title { get; init; }
+        // public string Title { get; init; }
+        public SectionCategoryDto SectionCategory { get; init; }
         public string Body { get; init; }
-        public int SortOrder { get; init; }
+        //public int SortOrder { get; init; }
     }
 }

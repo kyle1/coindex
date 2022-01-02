@@ -43,16 +43,26 @@ namespace Crypto
                 // });
                 //Attempting to get past CORS error...
                 //Source: https://stackoverflow.com/questions/59471861/access-to-xmlhttprequest-from-origin-has-been-blocked-by-cors-policy-no-access
-                options.AddDefaultPolicy(builder =>
+                // options.AddDefaultPolicy(builder =>
+                // {
+                //     builder
+                //         .WithOrigins(origins)
+                //         .AllowAnyMethod()
+                //         .AllowAnyHeader();
+                // });
+                options.AddPolicy(MyAllowSpecificOrigins, builder =>
                 {
                     builder
-                        .WithOrigins("http://localhost:4200", "http://localhost:3000", "https://localhost:3000");
+                        .WithOrigins(origins)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
                 });
             });
 
             // services.AddSingleton<IAssetsRepository, InMemAssetsRepository>();
             services.AddSingleton<IAssetsRepository, AssetsRepository>();
             services.AddSingleton<IAssetTagsRepository, AssetTagsRepository>();
+            services.AddSingleton<IAssetSectionsRepository, AssetSectionsRepository>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>

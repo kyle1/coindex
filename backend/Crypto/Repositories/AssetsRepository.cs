@@ -26,8 +26,15 @@ namespace Crypto.Repositories
             var asset = context.Assets
                 .Include(x => x.AssetTagXrefs)
                 .ThenInclude(x => x.AssetTag)
-                .Include(x => x.AssetSections.OrderBy(x => x.SortOrder))
+                .Include(x => x.AssetSections)
+                    .ThenInclude(x => x.SectionCategory)
+                    //.OrderBy(x => x.AssetSections.Select(x => x.))
+                .Include(x => x.AssetLinks)
                 .SingleOrDefault(asset => asset.AssetId == id);
+
+            var categories = context.SectionCategories.Include(x => x.AssetSections.Where(x => x.AssetId == id));
+
+            //asset.AssetSections = 
             return asset;
         }
 

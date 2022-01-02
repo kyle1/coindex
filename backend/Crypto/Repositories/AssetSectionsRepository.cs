@@ -7,6 +7,13 @@ namespace Crypto.Repositories
 {
     public class AssetSectionsRepository : IAssetSectionsRepository
     {
+        public List<SectionCategory> GetSectionCategories()
+        {
+            var context = new CryptoDbContext();
+            var categories = context.SectionCategories.ToList();
+            return categories;
+        }
+
         public AssetSection GetAssetSection(int id)
         {
             var context = new CryptoDbContext();
@@ -19,9 +26,7 @@ namespace Crypto.Repositories
             var context = new CryptoDbContext();
             var section = context.AssetSections.Single(x => x.AssetSectionId == sectionDto.AssetSectionId);
             
-            section.Title = sectionDto.Title;
             section.Body = sectionDto.Body;
-            section.SortOrder = sectionDto.SortOrder;
 
             context.SaveChanges();
         }

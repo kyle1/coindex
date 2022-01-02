@@ -16,29 +16,32 @@ interface SectionEditProps {
 }
 
 const SectionEdit: React.FC<SectionEditProps> = (props: SectionEditProps) => {
-  const [sectionTitle, setSectionTitle] = useState<string>(props.section.title);
+  const [sectionTitle, setSectionTitle] = useState<string>(props.section.sectionCategory.title);
   const [sectionBody, setSectionBody] = useState<string>(props.section.body);
 
   const saveSection = () => {
-    let section: AssetSection = {
-      assetSectionId: props.section.assetSectionId,
-      title: sectionTitle,
-      body: sectionBody,
-      sortOrder: 1, //TODO
-    };
     console.log("saving section...");
-    let options: any = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(section),
-    };
+
+    // let section: AssetSection = {
+    //   assetSectionId: props.section.assetSectionId,
+    //   // title: sectionTitle,
+    //   body: sectionBody,
+    //   //sortOrder: 1, //TODO
+    // };
+
+    // let options: any = {
+    //   method: "PUT",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(section),
+    // };
+
     // fetch(`${apiBaseUrl}/sections/${section.assetSectionId}`, options)
-    fetch(`${apiBaseUrl}/sections`, options)
-      .then((response) => response.json())
-      .then(
-        () => console.log("save completed"),
-        (error) => console.log(error)
-      );
+    //   //fetch(`${apiBaseUrl}/sections`, options)
+    //   .then((response) => response.json())
+    //   .then(
+    //     () => console.log("save completed"),
+    //     (error) => console.log(error)
+    //   );
   };
 
   return (

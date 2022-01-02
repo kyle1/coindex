@@ -20,6 +20,9 @@ namespace Crypto.Dtos
         public decimal? PriceChangePercentage30d { get; set; }
         public decimal? PriceChangePercentage1y { get; set; }
         public List<AssetTagDto> Tags { get; set; }
+        //TODO: Consider renaming classes to "AssetSection" and "AssetSectionEntry"
+        //public List<SectionCategoryDto> SectionCategories { get; set; }
         public List<AssetSectionDto> Sections { get; set; }
+        public List<AssetLinkDto> Links { get; set; }
     }
 }

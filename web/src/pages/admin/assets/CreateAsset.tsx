@@ -1,7 +1,17 @@
 import React, { useState } from "react";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import styled from "styled-components";
+import Button from "../../../components/Button";
+import Input from "../../../components/Input";
 import { InputTextarea } from "primereact/inputtextarea";
+
+const Container = styled.div`
+  margin: 10px;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 interface CreateAssetProps {}
 
@@ -18,8 +28,8 @@ const CreateAsset: React.FC<CreateAssetProps> = (props: CreateAssetProps) => {
   };
 
   return (
-    <div>
-      <b>New Event</b>
+    <Container>
+      <b>New Asset</b>
       <br />
       <br />
       Asset name*:
@@ -80,9 +90,11 @@ const CreateAsset: React.FC<CreateAssetProps> = (props: CreateAssetProps) => {
       />
       <br />
       <br />
-      <Button>Cancel</Button>
-      <Button onClick={() => handleSaveClick()}>Save</Button>
-    </div>
+      <Footer>
+        <Button>Cancel</Button>
+        <Button onClick={() => handleSaveClick()}>Save</Button>
+      </Footer>
+    </Container>
   );
 };
 

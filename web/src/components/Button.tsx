@@ -7,7 +7,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   console.log("Button evaluated.");
 
-  const [bgColor, setBgColor] = useState("#2e9caa");
+  // const [bgColor, setBgColor] = useState("#2e9caa");
+  const [bgColor, setBgColor] = useState("#aa70c7");
 
   const styles: any = {
     color: "black",
@@ -25,8 +26,10 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     <button
       {...props}
       style={styles}
-      onMouseEnter={() => setBgColor("#2c8e9b")}
-      onMouseLeave={() => setBgColor("#2e9caa")}
+      // onMouseEnter={() => setBgColor("#2c8e9b")}
+      // onMouseLeave={() => setBgColor("#2e9caa")}
+      onMouseEnter={() => setBgColor("#c298d8")}
+      onMouseLeave={() => setBgColor("#aa70c7")}
     >
       {props.children}
     </button>

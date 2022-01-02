@@ -8,8 +8,6 @@ namespace Crypto
     {
         public static AssetDto AsDto(this Asset asset)
         {
-            //var tags = asset.AssetTagXrefs.ToList().Select(x => x.AssetTag).ToList();
-
             return new AssetDto
             {
                 AssetId = asset.AssetId,
@@ -18,7 +16,8 @@ namespace Crypto
                 Website = asset.Website,
                 Subreddit = asset.Subreddit,
                 Tags = asset.AssetTagXrefs.ToList().Select(x => x.AssetTag.AsDto()).ToList(),
-                Sections = asset.AssetSections.Select(x => x.AsDto()).ToList()
+                Sections = asset.AssetSections.Select(x => x.AsDto()).ToList(),
+                Links = asset.AssetLinks.Select(x => x.AsDto()).ToList()
             };
         }
 
@@ -37,9 +36,29 @@ namespace Crypto
             return new AssetSectionDto
             {
                 AssetSectionId = section.AssetSectionId,
-                Title = section.Title,
+                SectionCategory = section.SectionCategory.AsDto(),
                 Body = section.Body,
-                SortOrder = section.SortOrder
+            };
+        }
+
+        public static AssetLinkDto AsDto(this AssetLink link)
+        {
+            return new AssetLinkDto
+            {
+                AssetLinkId = link.AssetLinkId,
+                Url = link.Url,
+                Description = link.Description
+            };
+        }
+
+        public static SectionCategoryDto AsDto(this SectionCategory category)
+        {
+            return new SectionCategoryDto
+            {
+                SectionCategoryId = category.SectionCategoryId,
+                Title = category.Title,
+                Description = category.Description,
+                SortOrder = category.SortOrder
             };
         }
     }
