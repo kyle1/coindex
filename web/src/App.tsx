@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import AssetTagsMaintenance from "./pages/admin/tags/AssetTagsMaintenance";
+import AssetTagsMaintenance from "./pages/admin/tags/TagsMaintenance";
 import AssetsMaintenance from "./pages/admin/assets/AssetsMaintenance";
 import Asset from "./pages/Asset";
 import Compare from "./pages/Compare";

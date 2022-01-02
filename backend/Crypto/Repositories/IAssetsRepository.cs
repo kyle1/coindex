@@ -10,7 +10,7 @@ namespace Crypto.Repositories
         IEnumerable<Asset> GetAssets();
         IEnumerable<Coin> GetCoinGeckoCoins();
         void CreateAsset(Asset asset);
-        void UpdateAsset(Asset asset);
+        void UpdateAsset(Asset updatedAsset);
         void DeleteAsset(int id);
     }
 }

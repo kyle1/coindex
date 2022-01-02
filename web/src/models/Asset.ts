@@ -8,6 +8,7 @@ export interface Asset {
   ticker: string;
   website?: string;
   subreddit?: string;
+  notes: string;
 
   marketCapRank?: number;
   currentPrice?: number;
@@ -26,6 +27,6 @@ export interface Asset {
   // pctChange30d?: number;
   tags?: AssetTag[];
   competitors?: Asset[];
-  sections: AssetSection[];
-  links: AssetLink[];
+  sections?: AssetSection[];
+  links?: AssetLink[];
 }

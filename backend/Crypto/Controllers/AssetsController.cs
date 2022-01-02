@@ -64,7 +64,7 @@ namespace Crypto.Controllers
         {
             Asset asset = new()
             {
-                AssetId = 1,
+                AssetId = 0,
                 AssetName = assetDto.AssetName,
                 Ticker = assetDto.Ticker,
                 Website = assetDto.Website,
@@ -93,7 +93,15 @@ namespace Crypto.Controllers
             //     Subreddit = assetDto.Subreddit
             // };
 
-            // repository.UpdateAsset(updatedAsset);
+            var updatedAsset = new Asset
+            {
+                AssetName = assetDto.AssetName,
+                Ticker = assetDto.Ticker,
+                Website = assetDto.Website,
+                Subreddit = assetDto.Subreddit
+            };
+
+            repository.UpdateAsset(updatedAsset);
 
             return NoContent();
         }

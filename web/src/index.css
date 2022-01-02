@@ -14,3 +14,7 @@ body {
   background: #0d1117;
   color: lightgray;
 }
+
+.p-sortable-column-icon {
+  display: none !important;
+}

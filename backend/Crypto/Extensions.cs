@@ -36,8 +36,9 @@ namespace Crypto
             return new AssetSectionDto
             {
                 AssetSectionId = section.AssetSectionId,
-                SectionCategory = section.SectionCategory.AsDto(),
+                AssetId = section.AssetId,
                 Body = section.Body,
+                SectionCategory = section.SectionCategory != null ? section.SectionCategory.AsDto() : null
             };
         }
 

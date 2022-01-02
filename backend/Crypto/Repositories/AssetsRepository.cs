@@ -28,25 +28,30 @@ namespace Crypto.Repositories
                 .ThenInclude(x => x.AssetTag)
                 .Include(x => x.AssetSections)
                     .ThenInclude(x => x.SectionCategory)
-                    //.OrderBy(x => x.AssetSections.Select(x => x.))
+                    // .OrderBy(x => x.AssetSections.Select(x => x.SectionCategory.SortOrder))
                 .Include(x => x.AssetLinks)
                 .SingleOrDefault(asset => asset.AssetId == id);
 
-            var categories = context.SectionCategories.Include(x => x.AssetSections.Where(x => x.AssetId == id));
+            // Not sure how to order the sections in the query above. This will handle it for now.
+            asset.AssetSections = asset.AssetSections.OrderBy(x => x.SectionCategory.SortOrder).ToList();
 
-            //asset.AssetSections = 
             return asset;
         }
 
         public void CreateAsset(Asset asset)
         {
-            //assets.Add(asset);
+            var context = new CryptoDbContext();
+            context.Assets.Add(asset);
+            context.SaveChanges();
         }
 
-        public void UpdateAsset(Asset asset)
+        public void UpdateAsset(Asset updatedAsset)
         {
-            // var index = assets.FindIndex(existingAsset => existingAsset.AssetId == asset.AssetId);
-            // assets[index] = asset;
+            //TODO: Test if this works.
+            var context = new CryptoDbContext();
+            //context.Assets.Add(updatedAsset);
+            context.Entry(updatedAsset).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         public void DeleteAsset(int id)

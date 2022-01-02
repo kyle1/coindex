@@ -85,10 +85,13 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
   };
 
   const handleSectionEditClick = (section: any) => {
-    console.log(section);
     setSelectedSection(section);
     setShowSectionEdit(true);
-    console.log("whaat");
+  };
+
+  const handleSectionSave = () => {
+    setShowSectionEdit(false);
+    getAsset(+id!);
   };
 
   useEffect(() => {
@@ -100,7 +103,12 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
     <>
       {showSectionEdit && (
         <Modal onConfirm={() => {}} onClose={() => setShowSectionEdit(false)}>
-          <SectionEdit section={selectedSection!} onCancel={() => setShowSectionEdit(false)} />
+          <SectionEdit
+            assetId={+id!}
+            section={selectedSection!}
+            onSave={handleSectionSave}
+            onCancel={() => setShowSectionEdit(false)}
+          />
         </Modal>
       )}
       <Container>
@@ -132,10 +140,18 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
             />
             <br />
             <br />
+            <div style={{ marginBottom: "15px" }}>
+              <span style={{ fontSize: "20px", fontWeight: "bold" }}>Overview</span>
+              <i
+                className="fas fa-plus"
+                style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
+                onClick={() => handleSectionEditClick(null)}
+              ></i>
+            </div>
             {asset.sections.map((section) => (
               <>
                 <div style={{ fontWeight: "bold" }}>
-                  {section.sectionCategory.title}
+                  {section.sectionCategory!.title}
                   <i
                     className="fas fa-pencil-alt"
                     style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}

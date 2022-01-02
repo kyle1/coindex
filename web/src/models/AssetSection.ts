@@ -2,6 +2,9 @@ import { SectionCategory } from "./SectionCategory";
 
 export interface AssetSection {
   assetSectionId: number;
-  sectionCategory: SectionCategory;
+  assetId: number;
+  sectionCategoryId: number;
   body: string;
+
+  sectionCategory?: SectionCategory;
 }

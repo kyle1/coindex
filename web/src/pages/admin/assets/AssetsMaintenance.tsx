@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { InputText } from "primereact/inputtext";
 import styled from "styled-components";
+import AssetEdit from "./AssetEdit";
 import Button from "../../../components/Button";
 import Modal from "../../../components/Modal";
-import CreateAsset from "./CreateAsset";
-import { Asset } from "../../../models/Asset";
 import { apiBaseUrl } from "../../../constants";
+import { Asset } from "../../../models/Asset";
 
 const Container = styled.div`
   margin: 10px;
@@ -22,8 +21,45 @@ const Heading = styled.div`
 interface AssetsMaintenanceProps {}
 
 const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMaintenanceProps) => {
-  const [showCreateAsset, setShowCreateAsset] = useState<boolean>(false);
-  const [assets, setAssets] = useState<Asset[]>();
+  const [showAssetEdit, setShowAssetEdit] = useState<boolean>(false);
+  const [assets, setAssets] = useState<Asset[]>([]);
+  const [selectedAsset, setSelectedAsset] = useState<Asset | null>();
+
+  const getAssets = (): void => {
+    fetch(`${apiBaseUrl}/assets`)
+      .then((response) => response.json())
+      .then(
+        (assets) => {
+          console.log(assets);
+          setAssets(assets);
+        },
+        (error) => console.log(error)
+      );
+  };
+
+  const handleNewClick = (): void => {
+    setSelectedAsset(null);
+    setShowAssetEdit(true);
+  };
+
+  const handleEditClick = (asset: Asset): void => {
+    setSelectedAsset(asset);
+    setShowAssetEdit(true);
+  };
+
+  const handleAssetSave = (): void => {
+    setShowAssetEdit(false);
+    getAssets();
+  };
+
+  const header: JSX.Element = (
+    <Heading>
+      Assets
+      <Button onClick={() => handleNewClick()}>
+        <i className="fas fa-plus" />
+      </Button>
+    </Heading>
+  );
 
   const assetTemplate = (asset: Asset): JSX.Element => (
     <>
@@ -73,36 +109,32 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
     </>
   );
 
-  const getAssets = () => {
-    console.log("getting assets...");
-    fetch(`${apiBaseUrl}/assets`)
-      .then((response) => response.json())
-      .then(
-        (assets) => {
-          console.log(assets);
-          setAssets(assets);
-        },
-        (error) => console.log(error)
-      );
-  };
+  const editTemplate = (asset: Asset): JSX.Element => (
+    <Button onClick={() => handleEditClick(asset)}>
+      <i className="fas fa-pencil-alt" />
+    </Button>
+  );
 
-  const header = (
-    <Heading>
-      Assets
-      <Button onClick={() => setShowCreateAsset(true)}>New</Button>
-    </Heading>
+  const deleteTemplate = (asset: Asset): JSX.Element => (
+    <Button onClick={() => console.log("TODO: delete")}>
+      <i className="fas fa-trash" />
+    </Button>
   );
 
   useEffect(() => getAssets(), []);
 
   return (
     <>
-      {showCreateAsset && (
-        <Modal onConfirm={() => {}} onClose={() => setShowCreateAsset(false)}>
-          <CreateAsset />
+      {showAssetEdit && (
+        <Modal onConfirm={() => {}} onClose={() => setShowAssetEdit(false)}>
+          <AssetEdit
+            asset={selectedAsset!}
+            onSave={handleAssetSave}
+            onCancel={() => setShowAssetEdit(false)}
+          />
         </Modal>
       )}
-      {!showCreateAsset && (
+      {!showAssetEdit && (
         <Container>
           <DataTable
             value={assets}
@@ -112,12 +144,12 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
           >
             <Column
               header="Asset"
-              headerStyle={{ width: "200px" }}
+              headerStyle={{ width: "300px" }}
               sortable
               sortField="assetName"
               body={assetTemplate}
             />
-            <Column field="ticker" header="Ticker" headerStyle={{ width: "100px" }} sortable />
+            <Column field="ticker" header="Ticker" headerStyle={{ width: "300px" }} sortable />
             {/* <Column
               field="website"
               header="Website"
@@ -141,6 +173,8 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
               //sortable
               body={linksTemplate}
             />
+            <Column header="Edit" body={editTemplate} sortable />
+            <Column header="Delete" body={deleteTemplate} sortable />
           </DataTable>
         </Container>
       )}

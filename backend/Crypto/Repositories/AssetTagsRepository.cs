@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Crypto.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crypto.Repositories
 {
@@ -22,13 +23,18 @@ namespace Crypto.Repositories
 
         public void CreateAssetTag(AssetTag tag)
         {
-            //tags.Add(tag);
+            var context = new CryptoDbContext();
+            context.AssetTags.Add(tag);
+            context.SaveChanges();
         }
 
-        public void UpdateAssetTag(AssetTag tag)
+        public void UpdateAssetTag(AssetTag updatedTag)
         {
-            // var index = tags.FindIndex(existingTag => existingTag.AssetTagId == tag.AssetTagId);
-            // tags[index] = tag;
+            //TODO: Test if this works.
+            var context = new CryptoDbContext();
+            // context.AssetSections.Add(updatedSection);
+            context.Entry(updatedTag).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         public void DeleteAssetTag(int id)

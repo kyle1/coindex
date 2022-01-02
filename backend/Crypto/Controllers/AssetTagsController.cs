@@ -44,7 +44,7 @@ namespace Crypto.Controllers
         {
             AssetTag tag = new()
             {
-                AssetTagId = 1,
+                AssetTagId = 0,
                 TagName = tagDto.TagName,
                 Description = tagDto.Description
             };
@@ -68,6 +68,15 @@ namespace Crypto.Controllers
             //     TagName = tagDto.TagName,
             //     Description = tagDto.Description
             // };
+
+            var updatedTag = new AssetTag
+            {
+                AssetTagId = tagDto.AssetTagId,
+                TagName = tagDto.TagName,
+                Description = tagDto.Description,
+            };
+
+            repository.UpdateAssetTag(updatedTag);
 
             // repository.UpdateAssetTag(updatedTag);
 
