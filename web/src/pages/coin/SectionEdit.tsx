@@ -88,9 +88,7 @@ const SectionEdit: React.FC<SectionEditProps> = (props: SectionEditProps) => {
       );
   };
 
-  useEffect(() => {
-    getSectionCategories();
-  }, []);
+  useEffect(() => getSectionCategories(), []);
 
   return (
     <Container>

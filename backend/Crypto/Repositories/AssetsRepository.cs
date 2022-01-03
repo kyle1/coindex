@@ -38,6 +38,29 @@ namespace Crypto.Repositories
             return asset;
         }
 
+        private void GetAssetComparison(List<int> assetIds)
+        {
+            var context = new CryptoDbContext();
+            var sections = context.SectionCategories.OrderBy(x => x.SortOrder).ToList();
+            var assetSections = context.AssetSections.Where(x => assetIds.Contains(x.AssetId)).ToList();
+
+            //Format needs to be something like:
+            
+            // [
+            //     {
+            //         section: "Scalability",
+            //         coin1: {
+            //             description: "1 tx/s",
+            //             rating: 5
+            //         },
+            //         coin2: {
+            //             description: "3 tx/s",
+            //             rating: 7
+            //         }
+            //     }
+            // ]
+            
+
         public void CreateAsset(Asset asset)
         {
             var context = new CryptoDbContext();

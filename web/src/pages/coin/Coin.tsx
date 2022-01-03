@@ -123,7 +123,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
     deleteAssetTag(tag);
   };
 
-  const handleSectionEditClick = (section: AssetSection) => {
+  const handleSectionEditClick = (section?: AssetSection) => {
     setSelectedSection(section);
     setShowSectionEdit(true);
   };
@@ -157,13 +157,12 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
               <img src={`/images/assets/${asset.ticker}.png`} style={{ width: "25px" }} />
               {asset!.assetName} ({asset!.ticker})
             </h3>
-            <br />
-            <b>Website:</b>{" "}
+            <b>Website:</b>&nbsp;
             <a href={asset!.website} className="link">
               {asset!.website}
             </a>
             <br />
-            <b>Subreddit:</b>{" "}
+            <b>Subreddit:</b>&nbsp;
             <a href={`https://reddit.com/${asset!.subreddit}`} className="link">
               {asset!.subreddit}
             </a>
@@ -186,7 +185,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
               <i
                 className="fas fa-plus"
                 style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
-                onClick={() => handleSectionEditClick(null)}
+                onClick={() => handleSectionEditClick(undefined)}
               ></i>
             </div>
             {asset!.sections?.map((section) => (

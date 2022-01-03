@@ -5,7 +5,7 @@ import AssetTagsMaintenance from "./pages/admin/tags/TagsMaintenance";
 import AssetsMaintenance from "./pages/admin/assets/AssetsMaintenance";
 import Coin from "./pages/coin/Coin";
 import Coins from "./pages/coins/Coins";
-import Compare from "./pages/Compare";
+import Compare from "./pages/compare/Compare";
 import Dyor from "./pages/admin/dyor/Dyor";
 import Events from "./pages/events/Events";
 import Home from "./pages/Home";
