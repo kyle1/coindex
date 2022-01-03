@@ -26,6 +26,8 @@ namespace Crypto.Entities
         public virtual DbSet<AssetTagCategory> AssetTagCategories { get; set; }
         public virtual DbSet<AssetTagXref> AssetTagXrefs { get; set; }
         public virtual DbSet<PortfolioAsset> PortfolioAssets { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<ResourceGroup> ResourceGroups { get; set; }
         public virtual DbSet<SectionCategory> SectionCategories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -74,13 +76,13 @@ namespace Crypto.Entities
                 entity.Property(e => e.CompetitorAssetId).HasColumnName("competitor_asset_id");
 
                 entity.HasOne(d => d.Asset)
-                    .WithMany(p => p.AssetCompetitors)
+                    .WithMany(p => p.AssetCompetitorAssets)
                     .HasForeignKey(d => d.AssetId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("asset_competitor_asset_id_fkey");
 
                 entity.HasOne(d => d.CompetitorAsset)
-                    .WithMany(p => p.AssetCompetitors)
+                    .WithMany(p => p.AssetCompetitorCompetitorAssets)
                     .HasForeignKey(d => d.CompetitorAssetId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("asset_competitor_competitor_asset_id_fkey");
@@ -153,6 +155,8 @@ namespace Crypto.Entities
                     .IsRequired()
                     .HasColumnName("body");
 
+                entity.Property(e => e.Rating).HasColumnName("rating");
+
                 entity.Property(e => e.SectionCategoryId).HasColumnName("section_category_id");
 
                 entity.HasOne(d => d.Asset)
@@ -174,8 +178,6 @@ namespace Crypto.Entities
 
                 entity.Property(e => e.AssetTagId).HasColumnName("asset_tag_id");
 
-                entity.Property(e => e.AssetTagCategoryId).HasColumnName("asset_tag_category_id");
-
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasColumnName("description");
@@ -183,11 +185,6 @@ namespace Crypto.Entities
                 entity.Property(e => e.TagName)
                     .IsRequired()
                     .HasColumnName("tag_name");
-
-                entity.HasOne(d => d.AssetTagCategory)
-                    .WithMany(p => p.AssetTags)
-                    .HasForeignKey(d => d.AssetTagCategoryId)
-                    .HasConstraintName("asset_tag_asset_tag_category_id_fkey");
             });
 
             modelBuilder.Entity<AssetTagCategory>(entity =>
@@ -253,15 +250,51 @@ namespace Crypto.Entities
                     .HasConstraintName("portfolio_asset_asset_id_fkey");
             });
 
+            modelBuilder.Entity<Resource>(entity =>
+            {
+                entity.ToTable("resource");
+
+                entity.Property(e => e.ResourceId).HasColumnName("resource_id");
+
+                entity.Property(e => e.Description).HasColumnName("description");
+
+                entity.Property(e => e.ResourceGroupId).HasColumnName("resource_group_id");
+
+                entity.Property(e => e.ResourceName)
+                    .IsRequired()
+                    .HasColumnName("resource_name");
+
+                entity.Property(e => e.Url)
+                    .IsRequired()
+                    .HasColumnName("url");
+
+                entity.HasOne(d => d.ResourceGroup)
+                    .WithMany(p => p.Resources)
+                    .HasForeignKey(d => d.ResourceGroupId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("resource_resource_group_id_fkey");
+            });
+
+            modelBuilder.Entity<ResourceGroup>(entity =>
+            {
+                entity.ToTable("resource_group");
+
+                entity.Property(e => e.ResourceGroupId).HasColumnName("resource_group_id");
+
+                entity.Property(e => e.Description).HasColumnName("description");
+
+                entity.Property(e => e.GroupName)
+                    .IsRequired()
+                    .HasColumnName("group_name");
+            });
+
             modelBuilder.Entity<SectionCategory>(entity =>
             {
                 entity.ToTable("section_category");
 
                 entity.Property(e => e.SectionCategoryId).HasColumnName("section_category_id");
 
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasColumnName("description");
+                entity.Property(e => e.Description).HasColumnName("description");
 
                 entity.Property(e => e.SortOrder).HasColumnName("sort_order");
 

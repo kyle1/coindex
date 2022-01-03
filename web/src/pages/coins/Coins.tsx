@@ -5,19 +5,39 @@ import styled from "styled-components";
 import { apiBaseUrl } from "../../constants";
 import { Asset } from "../../models/Asset";
 import { Link } from "react-router-dom";
+import Button from "../../components/Button";
 
 const Container = styled.div`
-  margin: 25px;
+  margin: 10px;
 
   .p-datatable {
     font-size: 12px;
   }
 `;
 
+const Heading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 26px;
+`;
+
 interface CoinsProps {}
 
 const Coins: React.FC<CoinsProps> = (props: CoinsProps) => {
   const [assets, setAssets] = useState<Asset[]>();
+
+  const getAssets = () => {
+    console.log("getting assets...");
+    fetch(`${apiBaseUrl}/assets`)
+      .then((response) => response.json())
+      .then(
+        (assets) => {
+          console.log(assets);
+          setAssets(assets);
+        },
+        (error) => console.log(error)
+      );
+  };
 
   const getColor = (value: number) => {
     let color: string = value > 0 ? "lightgreen" : value === 0 ? "orange" : "#EA4C46";
@@ -95,29 +115,40 @@ const Coins: React.FC<CoinsProps> = (props: CoinsProps) => {
         href={"http://www.reddit.com/" + asset.subreddit}
         target="_blank"
         className="fab fa-twitter"
-        style={{ textDecoration: "none", color: "white" }}
+        style={{ textDecoration: "none", color: "white", paddingRight: "10px" }}
       ></a>
+      <a
+        href={
+          "http://www.coinmarketcap.com/currencies/" +
+          asset.assetName.replace(" ", "-").replace(".", "-").toLowerCase()
+        }
+        target="_blank"
+        style={{ textDecoration: "none", color: "white", paddingRight: "10px" }}
+      >
+        <img src={`/images/cmc.png`} width="20px" style={{ verticalAlign: "bottom" }} />
+      </a>
     </>
   );
 
-  const getAssets = () => {
-    console.log("getting assets...");
-    fetch(`${apiBaseUrl}/assets`)
-      .then((response) => response.json())
-      .then(
-        (assets) => {
-          console.log(assets);
-          setAssets(assets);
-        },
-        (error) => console.log(error)
-      );
-  };
+  const header: JSX.Element = (
+    <Heading>
+      Coins
+      <Button onClick={() => console.log("todo")}>
+        <i className="fas fa-filter" />
+      </Button>
+    </Heading>
+  );
 
   useEffect(() => getAssets(), []);
 
   return (
     <Container>
-      <DataTable value={assets} className="p-datatable-sm editable-cells-table" editMode="cell">
+      <DataTable
+        value={assets}
+        className="p-datatable-sm editable-cells-table"
+        header={header}
+        editMode="cell"
+      >
         <Column header="Rank" field="marketCapRank" headerStyle={{ width: "100px" }} sortable />
         <Column
           header="Asset"

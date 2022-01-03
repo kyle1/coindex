@@ -1,5 +1,44 @@
-DROP TABLE IF EXISTS crypto;
-DROP TABLE IF EXISTS subreddit_stats;
+CREATE TABLE IF NOT EXISTS resource_group (
+	resource_group_id		serial PRIMARY KEY,
+	group_name				text NOT NULL,
+	description				text
+);
+
+INSERT INTO resource_group (group_name, description)
+VALUES
+('News', 'News'),
+('Research', 'Research'),
+('Events', 'Events'),
+('API', 'API'),
+('Software', 'Software'),
+('Analysts', 'Analysts')
+
+
+CREATE TABLE IF NOT EXISTS resource (
+	resource_id				serial PRIMARY KEY,
+	resource_name			text NOT NULL,
+	resource_group_id		int NOT NULL REFERENCES resource_group (resource_group_id),
+	url						text NOT NULL,
+	description				text
+);
+
+INSERT INTO resource (resource_name, resource_group_id, url, description)
+VALUES
+('Decrypt', 1, 'https://decrypt.co/', 'Your guide to Bitcoin, Ethereum & Web 3.0'),
+('Cointelegraph', 1, 'https://cointelegraph.com/', 'Bitcoin, Ethereum, Crypto News & Price Indexes'),
+('U Today', 1, 'https://u.today/', 'IT, AI and Fintech Daily News for You Today'),
+('CryptoPanic', 1, 'https://cryptopanic.com/', 'News aggregator platform indicating impact on price and market for traders and cryptocurrency enthusiasts'),
+('Messari', 1, 'https://messari.io/news', 'Real-Time Crypto News Aggregator'),
+('CoinMarketCap', 2, 'https://coinmarketcap.com/', 'Cryptocurrency Prices, Charts And Market Capitalizations'),
+('Messari', 2, 'https://messari.io/', 'Crypto Research, Data, and Tools'),
+('CoinGecko', 2, 'https://www.coingecko.com/en', 'Cryptocurrency Prices, Charts, and Crypto Market Cap'),
+('Glassnode', 2, 'https://glassnode.com/', 'On-chain market intelligence'),
+('CoinDance', 2, 'https://coin.dance/', 'Community-driven Bitcoin statistics and services.'),
+('CoinMarketCal', 3, 'https://coinmarketcal.com/en/', 'Cryptocurrency Calendar'),
+('CryptoPanic', 4, 'https://cryptopanic.com/developers/api/', 'CryptoPanic is providing free JSON API of recent posts and indicators.'),
+('Trading bot', 5, 'https://www.reddit.com/r/CryptoCurrency/comments/ruep0r/finally_did_it_i_made_a_crypto_trading_bot_that/', 'Automatically place orders on new listings before added to Binance or KuCoin');
+
+
 
 --Use Import feature to load asset table with records in crypto.csv
 CREATE TABLE IF NOT EXISTS asset (
@@ -8,35 +47,47 @@ CREATE TABLE IF NOT EXISTS asset (
 	ticker			text NOT NULL,
 	website			text,
 	subreddit		text
-	--created_date	timestamp NOT NULL,
-	--modified_date	timestamp NOT NULL
 );
 
 
-CREATE TABLE IF NOT EXISTS asset_tag_category (
-	asset_tag_category_id	serial PRIMARY KEY,
-	description				text NOT NULL
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
-);
+-- CREATE TABLE IF NOT EXISTS asset_tag_category (
+-- 	asset_tag_category_id	serial PRIMARY KEY,
+-- 	description				text NOT NULL
+-- );
 
 
 CREATE TABLE IF NOT EXISTS asset_tag (
 	asset_tag_id			serial PRIMARY KEY,
 	tag_name				text NOT NULL,
-	description				text NOT NULL,
-	asset_tag_category_id	int NOT NULL REFERENCES asset_tag_category (asset_tag_category_id)
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
+	description				text NOT NULL
+	--asset_tag_category_id	int NOT NULL REFERENCES asset_tag_category (asset_tag_category_id)
 );
+
+INSERT INTO asset_tag (tag_name, description)
+VALUES
+('Store of Value', 'Store of Value'),
+('PoW', 'Proof of Work'),
+('PoS', 'Proof of Stake'),
+('DAG', 'Directed acyclic graph'),
+('Smart Contracts', 'Smart Contracts'),
+('Layer-1', 'Layer-1'),
+('Layer-2', 'Layer-2'),
+('Interoperability', 'Interoperability'),
+('DeFi', 'Decentralized Finance'),
+('zkRollups', 'Zero-Knowledge Rollups'),
+('Collectibles & NFTs', 'Collectibles & NFTs'),
+('Gaming', 'Gaming'),
+('Metaverse', 'Metaverse'),
+('Privacy', 'Privacy'),
+('Meme', 'Meme'),
+('Logistics', 'Logistics'),
+('Events', 'Events')
 
 
 CREATE TABLE IF NOT EXISTS asset_tag_xref (
 	asset_tag_xref_id		serial PRIMARY KEY,
 	asset_id				int NOT NULL REFERENCES asset (asset_id),
 	asset_tag_id			int NOT NULL REFERENCES asset_tag (asset_tag_id)
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
 );
 
 
@@ -50,44 +101,55 @@ CREATE TABLE IF NOT EXISTS portfolio_asset (
 	conviction_rating		numeric,
 	hold_length				text,
 	notes					text
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
 );
 
 
 CREATE TABLE IF NOT EXISTS asset_competitor (
 	asset_tag_xref_id		serial PRIMARY KEY,
 	asset_id				int NOT NULL REFERENCES asset (asset_id),
-	competitor_asset_id		int NOT NULL REFERENCES asset_tag (asset_tag_id)
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
+	competitor_asset_id		int NOT NULL REFERENCES asset (asset_id)
 );
 
 
 CREATE TABLE IF NOT EXISTS section_category (
 	section_category_id		serial PRIMARY KEY,
 	title					text NOT NULL,
-	description				text NOT NULL,
+	description				text,
 	sort_order				int NOT NULL
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
 );
 
 INSERT INTO section_category (title, description, sort_order)
 VALUES
 ('About', 'Brief overview of the asset.', 1),
-('Decentralization', 'The transfer of control and decision-making from a centralized entity (individual, organization, or group thereof) to a distributed network.', 2);
+('Decentralization', 'The transfer of control and decision-making from a centralized entity (individual, organization, or group thereof) to a distributed network.', 2),
+('Scalability', 'Ability to support an enormous number of transactions and users without faltering by increasing fees and transaction times.', 3),
+('Security', 'Defenses that prevent malicious entities from taking over.', 4),
+('Tokenomics', 'Tokenomics is the science of token economy which consists of a set of rules that governs a cryptocurrency''s issuance and supply.', 5),
+('Website', 'Whitepapers explain the purpose and technology behind a project.', 6),
+('Whitepaper', NULL, 7),
+('Founder/team', NULL, 8),
+('Roadmap', NULL, 9),
+('On-chain metrics', NULL, 10),
+('Usability', NULL, 11),
+('Number of projects on platform (tokens/dApps)', NULL, 12),
+('Staking/rewards', NULL, 13),
+('Backers, investors, and partnerships', NULL, 14),
+('Exchange listings', NULL, 15),
+('Development activity', NULL, 16),
+('Developer adoption/adoptability', NULL, 17),
+('Marketing', NULL, 18),
+('Social', NULL, 19),
+('Competition', NULL, 20),
+('Analysts', 'Article writers, reddit posters, etc. who are dialed-in to the project', 21),
+('Useful links', 'Relevant websites, articles, reddit posts/comments, etc.', 22);
 
 
 CREATE TABLE IF NOT EXISTS asset_section (
 	asset_section_id		serial PRIMARY KEY,
 	asset_id				int NOT NULL REFERENCES asset (asset_id),
-	-- title					text NOT NULL,
 	section_category_id		int NOT NULL REFERENCES section_category (section_category_id),
-	body					text NOT NULL
-	--sort_order				int NOT NULL
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
+	body					text NOT NULL,
+	rating					int
 );
 
 INSERT INTO asset_section (asset_id, section_category_id, body)
@@ -107,8 +169,6 @@ CREATE TABLE IF NOT EXISTS asset_event (
 	notes					text,
 	is_confirmed			boolean NOT NULL,
 	is_starred				boolean NOT NULL
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
 );
 
 
@@ -117,8 +177,6 @@ CREATE TABLE IF NOT EXISTS asset_link (
 	asset_id				int NOT NULL REFERENCES asset (asset_id),
 	url						text NOT NULL,
 	description				text NOT NULL
-	--created_date			timestamp NOT NULL,
-	--modified_date			timestamp NOT NULL
 );
 
 

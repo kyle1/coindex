@@ -13,16 +13,12 @@ namespace Crypto.Controllers
     {
         private readonly IAssetTagsRepository repository;
 
-        public AssetTagsController(IAssetTagsRepository repository)
-        {
-            this.repository = repository;
-        }
+        public AssetTagsController(IAssetTagsRepository repository) => this.repository = repository;
 
         [HttpGet]
         public IEnumerable<AssetTagDto> GetAssetTags()
         {
             var tags = repository.GetAssetTags().Select(tag => tag.AsDto());
-
             return tags;
         }
 
@@ -30,12 +26,7 @@ namespace Crypto.Controllers
         public ActionResult<AssetTagDto> GetAssetTag(int id)
         {
             var tag = repository.GetAssetTag(id);
-
-            if (tag is null)
-            {
-                return NotFound();
-            }
-
+            if (tag is null) return NotFound();
             return tag.AsDto();
         }
 
@@ -87,14 +78,8 @@ namespace Crypto.Controllers
         public ActionResult DeleteAssetTag(int id)
         {
             var existingTag = repository.GetAssetTag(id);
-            
-            if (existingTag is null)
-            {
-                return NotFound();
-            }
-
+            if (existingTag is null) return NotFound();
             repository.DeleteAssetTag(id);
-
             return NoContent();
         }
     }

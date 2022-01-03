@@ -45,6 +45,13 @@ namespace Crypto.Repositories
             context.SaveChanges();
         }
 
+        public void SaveAssetTagXref(AssetTagXref xref)
+        {
+            var context = new CryptoDbContext();
+            context.AssetTagXrefs.Add(xref);
+            context.SaveChanges();
+        }
+
         public void UpdateAsset(Asset updatedAsset)
         {
             //TODO: Test if this works.
@@ -54,10 +61,18 @@ namespace Crypto.Repositories
             context.SaveChanges();
         }
 
-        public void DeleteAsset(int id)
+        public void DeleteAsset(Asset asset)
         {
-            // var index = assets.FindIndex(existingAsset => existingAsset.AssetId == id);
-            // assets.RemoveAt(index);
+            var context = new CryptoDbContext();
+            context.Assets.Remove(asset);
+            context.SaveChanges();
+        }
+
+        public void DeleteAssetTagXref(AssetTagXref xref)
+        {
+            var context = new CryptoDbContext();
+            context.AssetTagXrefs.Remove(xref);
+            context.SaveChanges();
         }
 
         public IEnumerable<Coin> GetCoinGeckoCoins()

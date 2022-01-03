@@ -6,6 +6,29 @@ namespace Crypto
 {
     public static class Extensions
     {
+        public static ResourceGroupDto AsDto(this ResourceGroup group)
+        {
+            return new ResourceGroupDto
+            {
+                ResourceGroupId = group.ResourceGroupId,
+                GroupName = group.GroupName,
+                Description = group.Description,
+            };
+        }
+
+        public static ResourceDto AsDto(this Resource resource)
+        {
+            return new ResourceDto
+            {
+                ResourceId = resource.ResourceId,
+                ResourceName = resource.ResourceName,
+                ResourceGroupId = resource.ResourceGroupId,
+                Url = resource.Url,
+                Description = resource.Description,
+                ResourceGroup = resource.ResourceGroup != null ? resource.ResourceGroup.AsDto() : null
+            };
+        }
+
         public static AssetDto AsDto(this Asset asset)
         {
             return new AssetDto
@@ -31,6 +54,16 @@ namespace Crypto
             };
         }
 
+        public static AssetTagXrefDto AsDto(this AssetTagXref xref)
+        {
+            return new AssetTagXrefDto
+            {
+                AssetTagXrefId = xref.AssetTagXrefId,
+                AssetId = xref.AssetId,
+                AssetTagId = xref.AssetTagId
+            };
+        }
+
         public static AssetSectionDto AsDto(this AssetSection section)
         {
             return new AssetSectionDto
@@ -38,6 +71,7 @@ namespace Crypto
                 AssetSectionId = section.AssetSectionId,
                 AssetId = section.AssetId,
                 Body = section.Body,
+                Rating = section.Rating,
                 SectionCategory = section.SectionCategory != null ? section.SectionCategory.AsDto() : null
             };
         }

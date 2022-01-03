@@ -12,6 +12,6 @@ namespace Crypto.Entities
         public int CompetitorAssetId { get; set; }
 
         public virtual Asset Asset { get; set; }
-        public virtual AssetTag CompetitorAsset { get; set; }
+        public virtual Asset CompetitorAsset { get; set; }
     }
 }

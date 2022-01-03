@@ -5,6 +5,7 @@ export interface AssetSection {
   assetId: number;
   sectionCategoryId: number;
   body: string;
+  rating?: number;
 
   sectionCategory?: SectionCategory;
 }

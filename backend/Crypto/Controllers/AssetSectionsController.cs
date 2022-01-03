@@ -13,10 +13,7 @@ namespace Crypto.Controllers
     {
         private readonly IAssetSectionsRepository repository;
 
-        public AssetSectionsController(IAssetSectionsRepository repository)
-        {
-            this.repository = repository;
-        }
+        public AssetSectionsController(IAssetSectionsRepository repository) => this.repository = repository;
 
         [HttpGet("categories")]
         public ActionResult<List<SectionCategoryDto>> GetSectionCategories()
@@ -30,12 +27,7 @@ namespace Crypto.Controllers
         public ActionResult<SectionCategoryDto> GetSectionCategory(int id)
         {
             var category = repository.GetSectionCategory(id);
-
-            if (category is null)
-            {
-                return NotFound();
-            }
-
+            if (category is null) return NotFound();
             return category.AsDto();
         }
 
@@ -61,10 +53,7 @@ namespace Crypto.Controllers
         {
             var existingCategory = repository.GetSectionCategory(id);
 
-            if (existingCategory is null)
-            {
-                return NotFound();
-            }
+            if (existingCategory is null) return NotFound();
 
             var updatedCategory = new SectionCategory
             {
@@ -86,7 +75,8 @@ namespace Crypto.Controllers
             {
                 AssetId = sectionDto.AssetId,
                 SectionCategoryId = sectionDto.SectionCategoryId,
-                Body = sectionDto.Body
+                Body = sectionDto.Body,
+                Rating = sectionDto.Rating
             };
 
             repository.CreateAssetSection(section);
@@ -99,16 +89,15 @@ namespace Crypto.Controllers
         {
             var existingSection = repository.GetAssetSection(id);
 
-            if (existingSection is null)
-            {
-                return NotFound();
-            }
+            if (existingSection is null) return NotFound();
 
             var updatedSection = new AssetSection
             {
                 AssetSectionId = sectionDto.AssetSectionId,
+                AssetId = sectionDto.AssetId,
                 SectionCategoryId = sectionDto.SectionCategoryId,
                 Body = sectionDto.Body,
+                Rating = sectionDto.Rating
             };
 
             repository.UpdateAssetSection(updatedSection);

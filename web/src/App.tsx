@@ -3,15 +3,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AssetTagsMaintenance from "./pages/admin/tags/TagsMaintenance";
 import AssetsMaintenance from "./pages/admin/assets/AssetsMaintenance";
-import Asset from "./pages/Asset";
+import Coin from "./pages/coin/Coin";
+import Coins from "./pages/coins/Coins";
 import Compare from "./pages/Compare";
+import Dyor from "./pages/admin/dyor/Dyor";
 import Events from "./pages/events/Events";
 import Home from "./pages/Home";
-import Movers from "./pages/movers/Movers";
-import Overview from "./pages/Overview";
 import Portfolio from "./pages/portfolio/Portfolio";
-import Coins from "./pages/coins/Coins";
-import Coin from "./pages/coin/Coin";
+import Resources from "./pages/resources/Resources";
 import SectionCategories from "./pages/admin/categories/SectionCategories";
 
 const App: React.FC = () => (
@@ -21,14 +20,14 @@ const App: React.FC = () => (
       <Route path="/" element={<Home />} />
       <Route path="/coins" element={<Coins />} />
       <Route path="/coins/:id" element={<Coin />} />
+      <Route path="/resources" element={<Resources />} />
       <Route path="/portfolio" element={<Portfolio />} />
-      <Route path="/movers" element={<Movers />} />
       <Route path="/events" element={<Events />} />
       <Route path="/compare" element={<Compare />} />
       <Route path="/admin/categories" element={<SectionCategories />} />
       <Route path="/admin/tags" element={<AssetTagsMaintenance />} />
       <Route path="/admin/assets" element={<AssetsMaintenance />} />
-      <Route path="/test" element={<Asset />} />
+      <Route path="/admin/dyor" element={<Dyor />} />
     </Routes>
   </BrowserRouter>
 );

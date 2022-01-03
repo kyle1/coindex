@@ -7,6 +7,7 @@ namespace Crypto.Dtos
         public int AssetId { get; init;}
         public int SectionCategoryId { get; init; }
         public string Body { get; init; }
+        public int? Rating { get; init; }
         
         public SectionCategoryDto SectionCategory { get; init; }
     }

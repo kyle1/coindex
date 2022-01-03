@@ -31,7 +31,7 @@ const AssetTagsMaintenance: React.FC<AssetTagsMaintenanceProps> = (
     fetch(`${apiBaseUrl}/tags`)
       .then((response) => response.json())
       .then(
-        (tags) => setAssetTags(tags),
+        (tags: AssetTag[]) => setAssetTags(tags),
         (error) => console.log(error)
       );
   };

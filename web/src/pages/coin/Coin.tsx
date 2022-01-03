@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { AutoComplete } from "primereact/autocomplete";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import SectionEdit from "./SectionEdit";
+import Modal from "../../components/Modal";
 import { apiBaseUrl } from "../../constants";
 import { Asset } from "../../models/Asset";
-import { useParams } from "react-router-dom";
-import { AssetTag } from "../../models/AssetTag";
-import { AutoComplete } from "primereact/autocomplete";
 import { AssetSection } from "../../models/AssetSection";
-import Modal from "../../components/Modal";
-import SectionEdit from "./SectionEdit";
+import { AssetTag } from "../../models/AssetTag";
 
 const Container = styled.div`
-  margin: 50px;
+  margin: 10px;
 
   .link {
     color: white;
@@ -62,7 +62,6 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
   };
 
   const getAsset = (id: number) => {
-    console.log(`getting asset ${id}...`);
     fetch(`${apiBaseUrl}/assets/${id}`)
       .then((response) => response.json())
       .then(
@@ -84,7 +83,47 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
       );
   };
 
-  const handleSectionEditClick = (section: any) => {
+  const saveAssetTag = (tag: AssetTag) => {
+    let options: any = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tag),
+    };
+    fetch(`${apiBaseUrl}/assets/${id}/tags`, options)
+      .then((response) => console.log(response))
+      .then(
+        () => {},
+        (error) => console.log(error)
+      );
+  };
+
+  const deleteAssetTag = (tag: AssetTag) => {
+    let options: any = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tag),
+    };
+    fetch(`${apiBaseUrl}/assets/${id}/tags/${tag.assetTagId}`, options)
+      .then((response) => console.log(response))
+      .then(
+        () => {},
+        (error) => console.log(error)
+      );
+  };
+
+  const handleTagSelect = (tag: AssetTag) => {
+    console.log("handling tag select...");
+    console.log(tag);
+    saveAssetTag(tag);
+  };
+
+  const handleTagUnselect = (tag: AssetTag) => {
+    console.log("handling tag unselect...");
+    console.log(tag);
+    deleteAssetTag(tag);
+  };
+
+  const handleSectionEditClick = (section: AssetSection) => {
     setSelectedSection(section);
     setShowSectionEdit(true);
   };
@@ -137,6 +176,8 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
               field="tagName"
               multiple
               onChange={(e) => setSelectedTags(e.value)}
+              onSelect={(e) => handleTagSelect(e.value)}
+              onUnselect={(e) => handleTagUnselect(e.value)}
             />
             <br />
             <br />
@@ -148,7 +189,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
                 onClick={() => handleSectionEditClick(null)}
               ></i>
             </div>
-            {asset.sections.map((section) => (
+            {asset!.sections?.map((section) => (
               <>
                 <div style={{ fontWeight: "bold" }}>
                   {section.sectionCategory!.title}
@@ -164,8 +205,10 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
             ))}
             <br />
             <br />
-            {asset.links.length > 0 && <div style={{ fontWeight: "bold" }}>Links</div>}
-            {asset.links.map((link) => (
+            {asset.links && asset!.links.length > 0 && (
+              <div style={{ fontWeight: "bold" }}>Links</div>
+            )}
+            {asset!.links?.map((link) => (
               <a href={link.url} target="_blank" style={{ textDecoration: "none", color: "white" }}>
                 {link.description}
               </a>

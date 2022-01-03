@@ -13,10 +13,8 @@ namespace Crypto.Controllers
     {
         private readonly IAssetsRepository repository;
 
-        public AssetsController(IAssetsRepository repository)
-        {
-            this.repository = repository;
-        }
+        public AssetsController(IAssetsRepository repository) => this.repository = repository;
+
 
         [HttpGet]
         public IEnumerable<AssetDto> GetAssets()
@@ -50,12 +48,7 @@ namespace Crypto.Controllers
         public ActionResult<AssetDto> GetAsset(int id)
         {
             var asset = repository.GetAsset(id);
-
-            if (asset is null)
-            {
-                return NotFound();
-            }
-
+            if (asset is null) return NotFound();
             return asset.AsDto();
         }
 
@@ -75,16 +68,27 @@ namespace Crypto.Controllers
 
             return CreatedAtAction(nameof(GetAsset), new { id = asset.AssetId }, asset.AsDto());
         }
+
+        [HttpPost("{assetId}/tags")]
+        public ActionResult<AssetTagXrefDto> SaveAssetTagXref(int assetId, AssetTagDto tagDto)
+        {
+            AssetTagXref xref = new()
+            {
+                AssetId = assetId,
+                AssetTagId = tagDto.AssetTagId
+            };
+
+            repository.SaveAssetTagXref(xref);
+
+            return CreatedAtAction("GetAssetTag", new { id = xref.AssetTagXrefId }, xref.AsDto());
+        }
         
         [HttpPut("{id}")]
         public ActionResult UpdateAsset(int id, UpdateAssetDto assetDto)
         {
             var existingAsset = repository.GetAsset(id);
 
-            if (existingAsset is null)
-            {
-                return NotFound();
-            }
+            if (existingAsset is null) return NotFound();
 
             // Asset updatedAsset = existingAsset with {
             //     AssetName = assetDto.AssetName,
@@ -109,15 +113,19 @@ namespace Crypto.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteAsset(int id)
         {
-            var existingAsset = repository.GetAsset(id);
-            
-            if (existingAsset is null)
-            {
-                return NotFound();
-            }
+            var asset = repository.GetAsset(id);
+            if (asset is null) return NotFound();
+            repository.DeleteAsset(asset);
+            return NoContent();
+        }
 
-            repository.DeleteAsset(id);
-
+        [HttpDelete("{assetId}/tags/{tagId}")]
+        public ActionResult DeleteAssetTagXref(int assetId, int tagId)
+        {
+            var asset = repository.GetAsset(assetId);
+            if (asset is null) return NotFound();
+            var xref = asset.AssetTagXrefs.Single(x => x.AssetTagId == tagId);
+            repository.DeleteAssetTagXref(xref);
             return NoContent();
         }
     }

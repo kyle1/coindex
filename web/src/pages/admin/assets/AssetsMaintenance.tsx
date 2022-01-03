@@ -104,8 +104,18 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
         href={"http://www.reddit.com/" + asset.subreddit}
         target="_blank"
         className="fab fa-twitter"
-        style={{ textDecoration: "none", color: "white" }}
+        style={{ textDecoration: "none", color: "white", paddingRight: "10px" }}
       ></a>
+      <a
+        href={
+          "http://www.coinmarketcap.com/currencies/" +
+          asset.assetName.replace(" ", "-").replace(".", "-").toLowerCase()
+        }
+        target="_blank"
+        style={{ textDecoration: "none", color: "white", paddingRight: "10px" }}
+      >
+        <img src={`/images/cmc.png`} width="20px" style={{ verticalAlign: "bottom" }} />
+      </a>
     </>
   );
 
