@@ -25,6 +25,7 @@ namespace Crypto.Entities
         public virtual DbSet<AssetTag> AssetTags { get; set; }
         public virtual DbSet<AssetTagCategory> AssetTagCategories { get; set; }
         public virtual DbSet<AssetTagXref> AssetTagXrefs { get; set; }
+        public virtual DbSet<AssetTransaction> AssetTransactions { get; set; }
         public virtual DbSet<PortfolioAsset> PortfolioAssets { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceGroup> ResourceGroups { get; set; }
@@ -219,6 +220,35 @@ namespace Crypto.Entities
                     .HasForeignKey(d => d.AssetTagId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("asset_tag_xref_asset_tag_id_fkey");
+            });
+
+            modelBuilder.Entity<AssetTransaction>(entity =>
+            {
+                entity.ToTable("asset_transaction");
+
+                entity.Property(e => e.AssetTransactionId).HasColumnName("asset_transaction_id");
+
+                entity.Property(e => e.AssetId).HasColumnName("asset_id");
+
+                entity.Property(e => e.AssetPrice).HasColumnName("asset_price");
+
+                entity.Property(e => e.Platform)
+                    .IsRequired()
+                    .HasColumnName("platform");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.TransactionDate).HasColumnName("transaction_date");
+
+                entity.Property(e => e.TransactionType)
+                    .IsRequired()
+                    .HasColumnName("transaction_type");
+
+                entity.HasOne(d => d.Asset)
+                    .WithMany(p => p.AssetTransactions)
+                    .HasForeignKey(d => d.AssetId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("asset_transaction_asset_id_fkey");
             });
 
             modelBuilder.Entity<PortfolioAsset>(entity =>

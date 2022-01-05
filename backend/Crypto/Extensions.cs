@@ -86,6 +86,20 @@ namespace Crypto
             };
         }
 
+        public static AssetTransactionDto AsDto(this AssetTransaction transaction)
+        {
+            return new AssetTransactionDto
+            {
+                AssetTransactionId = transaction.AssetTransactionId,
+                AssetId = transaction.AssetId,
+                TransactionDate = transaction.TransactionDate,
+                TransactionType = transaction.TransactionType,
+                Quantity = transaction.Quantity,
+                AssetPrice = transaction.AssetPrice,
+                Platform = transaction.Platform
+            };
+        }
+
         public static SectionCategoryDto AsDto(this SectionCategory category)
         {
             return new SectionCategoryDto

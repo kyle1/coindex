@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { AutoComplete } from "primereact/autocomplete";
 import { useParams } from "react-router-dom";
+import { AutoComplete } from "primereact/autocomplete";
 import styled from "styled-components";
 import SectionEdit from "./SectionEdit";
 import Modal from "../../components/Modal";
@@ -8,14 +8,21 @@ import { apiBaseUrl } from "../../constants";
 import { Asset } from "../../models/Asset";
 import { AssetSection } from "../../models/AssetSection";
 import { AssetTag } from "../../models/AssetTag";
+import CoinCalendar from "./calendar/CoinCalendar";
 
 const Container = styled.div`
   margin: 10px;
-
+  font-size: 14px;
   .link {
     color: white;
     text-decoration: none;
   }
+`;
+
+const OverviewContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 100px;
 `;
 
 interface CoinProps {}
@@ -188,33 +195,44 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
                 onClick={() => handleSectionEditClick(undefined)}
               ></i>
             </div>
-            {asset!.sections?.map((section) => (
-              <>
-                <div style={{ fontWeight: "bold" }}>
-                  {section.sectionCategory!.title}
-                  <i
-                    className="fas fa-pencil-alt"
-                    style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
+            <OverviewContainer>
+              {asset!.sections?.map((section) => (
+                <div>
+                  <div
+                    style={{ fontWeight: "bold" }}
                     onClick={() => handleSectionEditClick(section)}
-                  ></i>
+                  >
+                    {section.sectionCategory!.title}
+                    <i
+                      className="fas fa-pencil-alt"
+                      style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
+                      // onClick={() => handleSectionEditClick(section)}
+                    ></i>
+                  </div>
+                  <div>{section.body}</div>
+                  <br />
                 </div>
-                <div>{section.body}</div>
-                <br />
-              </>
-            ))}
-            <br />
-            <br />
-            {asset.links && asset!.links.length > 0 && (
-              <div style={{ fontWeight: "bold" }}>Links</div>
-            )}
-            {asset!.links?.map((link) => (
-              <a href={link.url} target="_blank" style={{ textDecoration: "none", color: "white" }}>
-                {link.description}
-              </a>
-            ))}
+              ))}
+              <br />
+              <br />
+              {asset.links && asset!.links.length > 0 && (
+                <div style={{ fontWeight: "bold" }}>Links</div>
+              )}
+              {asset!.links?.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  {link.description}
+                </a>
+              ))}
+            </OverviewContainer>
           </>
         )}
       </Container>
+      <br />
+      {/* <CoinCalendar /> */}
     </>
   );
 };

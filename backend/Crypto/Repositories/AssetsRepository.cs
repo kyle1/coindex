@@ -59,6 +59,7 @@ namespace Crypto.Repositories
             //         }
             //     }
             // ]
+        }
             
 
         public void CreateAsset(Asset asset)
