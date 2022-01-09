@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button as PrimeButton } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import styled from "styled-components";
@@ -10,6 +11,10 @@ import { Asset } from "../../../models/Asset";
 
 const Container = styled.div`
   margin: 10px;
+
+  .p-datatable {
+    font-size: 13px;
+  }
 `;
 
 const Heading = styled.div`
@@ -21,6 +26,8 @@ const Heading = styled.div`
 interface AssetsMaintenanceProps {}
 
 const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMaintenanceProps) => {
+  console.log("Evaluating AssetsMaintenance...");
+  console.log(props);
   const [showAssetEdit, setShowAssetEdit] = useState<boolean>(false);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>();
@@ -29,10 +36,21 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
     fetch(`${apiBaseUrl}/assets`)
       .then((response) => response.json())
       .then(
-        (assets) => {
-          console.log(assets);
-          setAssets(assets);
-        },
+        (assets: Asset[]) => setAssets(assets),
+        (error) => console.log(error)
+      );
+  };
+
+  const deleteAsset = (id: number): void => {
+    let options: any = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: null,
+    };
+    fetch(`${apiBaseUrl}/assets/${id}`, options)
+      .then((response) => console.log(response))
+      .then(
+        () => getAssets(),
         (error) => console.log(error)
       );
   };
@@ -63,27 +81,12 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
 
   const assetTemplate = (asset: Asset): JSX.Element => (
     <>
-      <img src={`/images/assets/${asset.ticker}.png`} style={{ width: "15px" }} />
+      <img
+        src={`/images/assets/${asset.ticker}.png`}
+        style={{ width: "22px", paddingRight: "2px" }}
+      />
       {asset.assetName}
     </>
-  );
-
-  const websiteTemplate = (asset: Asset): JSX.Element => (
-    <a
-      href={asset.website}
-      target="_blank"
-      className="fas fa-bookmark"
-      style={{ textDecoration: "none", color: "white" }}
-    ></a>
-  );
-
-  const subredditTemplate = (asset: Asset): JSX.Element => (
-    <a
-      href={"http://www.reddit.com/" + asset.subreddit}
-      target="_blank"
-      className="fab fa-reddit-alien"
-      style={{ textDecoration: "none", color: "white" }}
-    ></a>
   );
 
   const linksTemplate = (asset: Asset): JSX.Element => (
@@ -119,16 +122,21 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
     </>
   );
 
-  const editTemplate = (asset: Asset): JSX.Element => (
-    <Button onClick={() => handleEditClick(asset)}>
-      <i className="fas fa-pencil-alt" />
-    </Button>
-  );
-
-  const deleteTemplate = (asset: Asset): JSX.Element => (
-    <Button onClick={() => console.log("TODO: delete")}>
-      <i className="fas fa-trash" />
-    </Button>
+  const actionBodyTemplate = (asset: Asset): JSX.Element => (
+    <>
+      <PrimeButton
+        icon="pi pi-pencil"
+        className="p-button-rounded p-button-success"
+        style={{ height: "30px", width: "30px", marginRight: "15px" }}
+        onClick={() => handleEditClick(asset)}
+      />
+      <PrimeButton
+        icon="pi pi-trash"
+        className="p-button-rounded p-button-warning"
+        style={{ height: "30px", width: "30px" }}
+        onClick={() => deleteAsset(asset.assetId)}
+      />
+    </>
   );
 
   useEffect(() => getAssets(), []);
@@ -146,12 +154,7 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
       )}
       {!showAssetEdit && (
         <Container>
-          <DataTable
-            value={assets}
-            className="p-datatable-sm editable-cells-table"
-            header={header}
-            editMode="cell"
-          >
+          <DataTable value={assets} className="p-datatable-sm editable-cells-table" header={header}>
             <Column
               header="Asset"
               headerStyle={{ width: "300px" }}
@@ -160,22 +163,6 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
               body={assetTemplate}
             />
             <Column field="ticker" header="Ticker" headerStyle={{ width: "300px" }} sortable />
-            {/* <Column
-              field="website"
-              header="Website"
-              headerStyle={{ width: "300px" }}
-              filter
-              sortable
-              body={websiteTemplate}
-            />
-            <Column
-              field="subreddit"
-              header="Subreddit"
-              headerStyle={{ width: "300px" }}
-              filter
-              sortable
-              body={subredditTemplate}
-            /> */}
             <Column
               header="Links"
               headerStyle={{ width: "300px" }}
@@ -183,8 +170,7 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
               //sortable
               body={linksTemplate}
             />
-            <Column header="Edit" body={editTemplate} sortable />
-            <Column header="Delete" body={deleteTemplate} sortable />
+            <Column header="" body={actionBodyTemplate} sortable />
           </DataTable>
         </Container>
       )}

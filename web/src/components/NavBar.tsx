@@ -108,7 +108,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </button>
           <div className="dropdown-content">
             <NavLink to="/admin/assets">Assets</NavLink>
-            <NavLink to="/admin/categories">Section Categories</NavLink>
+            <NavLink to="/admin/sections">Sections</NavLink>
             <NavLink to="/admin/tags">Tags</NavLink>
             <NavLink to="/admin/dyor">Dyor</NavLink>
             <NavLink to="/test">Test</NavLink>

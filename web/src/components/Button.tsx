@@ -20,6 +20,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     width: "70px",
     height: "35px",
     fontWeight: "bold",
+    ...props.style,
   };
 
   return (

@@ -5,11 +5,16 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Asset } from "../../models/Asset";
+import { AssetEvent } from "../../models/AssetEvent";
 import { assets } from "../../testData";
 
-interface CreateEventProps {}
+interface EventEditProps {
+  event: AssetEvent;
+  onSave: () => void;
+  onCancel: () => void;
+}
 
-const CreateEvent: React.FC<CreateEventProps> = (props: CreateEventProps) => {
+const EventEdit: React.FC<EventEditProps> = (props: EventEditProps) => {
   const [eventName, setEventName] = useState<string>("");
   const [filteredAssets, setFilteredAssets] = useState<Asset[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<Asset>();
@@ -102,4 +107,4 @@ const CreateEvent: React.FC<CreateEventProps> = (props: CreateEventProps) => {
   );
 };
 
-export default CreateEvent;
+export default EventEdit;

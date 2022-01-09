@@ -11,7 +11,7 @@ VALUES
 ('Events', 'Events'),
 ('API', 'API'),
 ('Software', 'Software'),
-('Analysts', 'Analysts')
+('Analysts', 'Analysts');
 
 
 CREATE TABLE IF NOT EXISTS resource (
@@ -36,7 +36,14 @@ VALUES
 ('CoinDance', 2, 'https://coin.dance/', 'Community-driven Bitcoin statistics and services.'),
 ('CoinMarketCal', 3, 'https://coinmarketcal.com/en/', 'Cryptocurrency Calendar'),
 ('CryptoPanic', 4, 'https://cryptopanic.com/developers/api/', 'CryptoPanic is providing free JSON API of recent posts and indicators.'),
-('Trading bot', 5, 'https://www.reddit.com/r/CryptoCurrency/comments/ruep0r/finally_did_it_i_made_a_crypto_trading_bot_that/', 'Automatically place orders on new listings before added to Binance or KuCoin');
+('Trading bot', 5, 'https://www.reddit.com/r/CryptoCurrency/comments/ruep0r/finally_did_it_i_made_a_crypto_trading_bot_that/', 'Automatically place orders on new listings before added to Binance or KuCoin'),
+('Route 2 FI', 6, 'https://twitter.com/Route2FI', 'DeFi, web3, and financial freedom'),
+('Jack Niewold', 6, 'https://twitter.com/JackNiewold', 'Altcoins'),
+('Andrew Kang', 6, 'https://twitter.com/Rewkang', 'General crypto'),
+('Cryptoyieldinfo', 6, 'https://twitter.com/Cryptoyieldinfo', 'Defi'),
+('DeFi Dad', 6, 'https://twitter.com/DeFi_Dad', 'DeFi super-user / educator'),
+('rektdiomedes', 6, 'https://twitter.com/rektdiomedes', 'Full-time yield farmer. Defi analysis');
+
 
 
 
@@ -131,7 +138,7 @@ VALUES
 ('Roadmap', NULL, 9),
 ('On-chain metrics', NULL, 10),
 ('Usability', NULL, 11),
-('Number of projects on platform (tokens/dApps)', NULL, 12),
+('Ecosystem', 'Tokens and/or dApps on the platform', 12),
 ('Staking/rewards', NULL, 13),
 ('Backers, investors, and partnerships', NULL, 14),
 ('Exchange listings', NULL, 15),

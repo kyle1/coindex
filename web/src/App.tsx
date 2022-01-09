@@ -7,12 +7,13 @@ import Coin from "./pages/coin/Coin";
 import Coins from "./pages/coins/Coins";
 import Compare from "./pages/compare/Compare";
 import Dyor from "./pages/admin/dyor/Dyor";
-import Events from "./pages/events/Events";
+import Events from "./pages/events/EventsMaintenance";
 import Home from "./pages/Home";
 import Portfolio from "./pages/portfolio/Portfolio";
 import Resources from "./pages/resources/Resources";
-import SectionCategories from "./pages/admin/categories/SectionCategories";
+import SectionsMaintenance from "./pages/admin/sections/SectionsMaintenance";
 import Test from "./pages/Test";
+import EventsMaintenance from "./pages/events/EventsMaintenance";
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -23,9 +24,9 @@ const App: React.FC = () => (
       <Route path="/coins/:id" element={<Coin />} />
       <Route path="/resources" element={<Resources />} />
       <Route path="/portfolio" element={<Portfolio />} />
-      <Route path="/events" element={<Events />} />
+      <Route path="/events" element={<EventsMaintenance />} />
       <Route path="/compare" element={<Compare />} />
-      <Route path="/admin/categories" element={<SectionCategories />} />
+      <Route path="/admin/sections" element={<SectionsMaintenance />} />
       <Route path="/admin/tags" element={<AssetTagsMaintenance />} />
       <Route path="/admin/assets" element={<AssetsMaintenance />} />
       <Route path="/admin/dyor" element={<Dyor />} />

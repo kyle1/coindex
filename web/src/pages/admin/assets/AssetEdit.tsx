@@ -22,13 +22,15 @@ interface AssetEditProps {
 }
 
 const AssetEdit: React.FC<AssetEditProps> = (props: AssetEditProps) => {
+  console.log("Evaluating AssetEdit...");
+  console.log(props);
   const [assetName, setAssetName] = useState<string>(props.asset?.assetName);
   const [ticker, setTicker] = useState<string>(props.asset?.ticker);
   const [website, setWebsite] = useState<string | undefined>(props.asset?.website);
   const [subreddit, setSubreddit] = useState<string | undefined>(props.asset?.subreddit);
-  const [notes, setNotes] = useState<string>(props.asset.notes);
+  const [notes, setNotes] = useState<string>(props.asset?.notes);
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (): void => {
     //TODO: validate, then save.
     const asset: Asset = {
       assetId: props.asset?.assetId ?? 0,
@@ -76,7 +78,7 @@ const AssetEdit: React.FC<AssetEditProps> = (props: AssetEditProps) => {
 
   return (
     <Container>
-      <b>New Asset</b>
+      <b>{props.asset ? "Edit" : "New"} Asset</b>
       <br />
       <br />
       Asset name*:

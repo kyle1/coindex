@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button as PrimeButton } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import styled from "styled-components";
@@ -10,6 +11,10 @@ import { Section } from "../../../models/Section";
 
 const Container = styled.div`
   margin: 10px;
+
+  .p-datatable {
+    font-size: 13px;
+  }
 `;
 
 const Heading = styled.div`
@@ -18,9 +23,9 @@ const Heading = styled.div`
   font-size: 26px;
 `;
 
-interface SectionCategoriesProps {}
+interface SectionsMaintenaceProps {}
 
-const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCategoriesProps) => {
+const SectionsMaintenace: React.FC<SectionsMaintenaceProps> = (props: SectionsMaintenaceProps) => {
   const [showSectionEdit, setShowSectionEdit] = useState<boolean>(false);
   const [sections, setSections] = useState<Section[]>([]);
   const [selectedSection, setSelectedSection] = useState<Section | null>();
@@ -30,6 +35,20 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
       .then((response) => response.json())
       .then(
         (categories: Section[]) => setSections(categories),
+        (error) => console.log(error)
+      );
+  };
+
+  const deleteSection = (id: number): void => {
+    let options: any = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: null,
+    };
+    fetch(`${apiBaseUrl}/sections/${id}`, options)
+      .then((response) => console.log(response))
+      .then(
+        () => getSections(),
         (error) => console.log(error)
       );
   };
@@ -50,23 +69,40 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
 
   const header: JSX.Element = (
     <Heading>
-      Section Categories
+      Sections
       <Button onClick={() => handleNewClick()}>
         <i className="fas fa-plus" />
       </Button>
     </Heading>
   );
 
-  const editTemplate = (section: Section): JSX.Element => (
-    <Button onClick={() => handleEditClick(section)}>
-      <i className="fas fa-pencil-alt" />
-    </Button>
-  );
+  // const editTemplate = (section: Section): JSX.Element => (
+  //   <Button onClick={() => handleEditClick(section)}>
+  //     <i className="fas fa-pencil-alt" />
+  //   </Button>
+  // );
 
-  const deleteTemplate = (section: Section): JSX.Element => (
-    <Button onClick={() => console.log("TODO: delete")}>
-      <i className="fas fa-trash" />
-    </Button>
+  // const deleteTemplate = (section: Section): JSX.Element => (
+  //   <Button onClick={() => console.log("TODO: delete")}>
+  //     <i className="fas fa-trash" />
+  //   </Button>
+  // );
+
+  const actionBodyTemplate = (section: Section): JSX.Element => (
+    <>
+      <PrimeButton
+        icon="pi pi-pencil"
+        className="p-button-rounded p-button-success"
+        style={{ height: "30px", width: "30px", marginRight: "15px" }}
+        onClick={() => handleEditClick(section)}
+      />
+      <PrimeButton
+        icon="pi pi-trash"
+        className="p-button-rounded p-button-warning"
+        style={{ height: "30px", width: "30px" }}
+        onClick={() => deleteSection(section.sectionId)}
+      />
+    </>
   );
 
   useEffect(() => getSections(), []);
@@ -91,7 +127,7 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
             header={header}
             editMode="cell"
           >
-            <Column field="title" header="Title" headerStyle={{ width: "200px" }} sortable />
+            <Column field="title" header="Title" headerStyle={{ width: "300px" }} sortable />
             <Column
               field="description"
               header="Description"
@@ -104,8 +140,9 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
               //headerStyle={{ width: "300px" }}
               sortable
             />
-            <Column header="Edit" body={editTemplate} sortable />
-            <Column header="Delete" body={deleteTemplate} sortable />
+            {/* <Column header="Edit" body={editTemplate} sortable />
+            <Column header="Delete" body={deleteTemplate} sortable /> */}
+            <Column header="" body={actionBodyTemplate} sortable />
           </DataTable>
         </Container>
       )}
@@ -113,4 +150,4 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
   );
 };
 
-export default SectionCategories;
+export default SectionsMaintenace;

@@ -88,6 +88,16 @@ namespace Crypto.Repositories
         public void DeleteAsset(Asset asset)
         {
             var context = new CryptoDbContext();
+
+            if (asset.AssetTagXrefs.Count > 0)
+            {
+                context.AssetTagXrefs.RemoveRange(asset.AssetTagXrefs);
+            }
+            if (asset.SectionEntries.Count > 0)
+            {
+                context.SectionEntries.RemoveRange(asset.SectionEntries);
+            }
+
             context.Assets.Remove(asset);
             context.SaveChanges();
         }

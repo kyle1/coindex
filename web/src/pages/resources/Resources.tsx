@@ -24,6 +24,12 @@ const Resources: React.FC<ResourcesProps> = (props: ResourcesProps) => {
       );
   };
 
+  const resourceNameTemplate = (resource: Resource): JSX.Element => (
+    <a href={resource.url} target="_blank" style={{ textDecoration: "none", color: "white" }}>
+      {resource.resourceName}
+    </a>
+  );
+
   const linkTemplate = (resource: Resource): JSX.Element => (
     <a href={resource.url} target="_blank" style={{ textDecoration: "none", color: "white" }}>
       {resource.url}
@@ -43,20 +49,26 @@ const Resources: React.FC<ResourcesProps> = (props: ResourcesProps) => {
         //header={header}
         editMode="cell"
       >
-        <Column field="resourceName" header="Resource" headerStyle={{ width: "200px" }} sortable />
         <Column
           field="resourceGroup.groupName"
           header="Group"
-          headerStyle={{ width: "200px" }}
+          headerStyle={{ width: "100px" }}
           sortable
         />
         <Column
+          field="resourceName"
+          header="Resource"
+          headerStyle={{ width: "100px" }}
+          body={resourceNameTemplate}
+          sortable
+        />
+        {/* <Column
           field="url"
           header="Link"
           headerStyle={{ width: "300px" }}
           body={linkTemplate}
           sortable
-        />
+        /> */}
         <Column
           field="description"
           header="Description"
