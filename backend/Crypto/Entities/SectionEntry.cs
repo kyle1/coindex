@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace Crypto.Entities
 {
-    public partial class AssetSection
+    public partial class SectionEntry
     {
-        public int AssetSectionId { get; set; }
+        public int SectionEntryId { get; set; }
         public int AssetId { get; set; }
-        public int SectionCategoryId { get; set; }
+        public int SectionId { get; set; }
         public string Body { get; set; }
         public int? Rating { get; set; }
 
         public virtual Asset Asset { get; set; }
-        public virtual SectionCategory SectionCategory { get; set; }
+        public virtual Section Section { get; set; }
     }
 }

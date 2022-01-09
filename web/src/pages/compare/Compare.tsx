@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { apiBaseUrl } from "../../constants";
 import { Asset } from "../../models/Asset";
-import { SectionCategory } from "../../models/SectionCategory";
+import { Section } from "../../models/Section";
 
 const Container = styled.div`
   margin: 10px;
@@ -16,10 +16,10 @@ const CompareProps: React.FC<CompareProps> = (props: CompareProps) => {
   const [assets, setAssets] = useState<Asset[]>([]);
 
   const getCategories = () => {
-    fetch(`${apiBaseUrl}/sections/categories`)
+    fetch(`${apiBaseUrl}/sections`)
       .then((response) => response.json())
       .then(
-        (categories: SectionCategory[]) => {
+        (categories: Section[]) => {
           console.log(categories);
         },
         (error) => console.log(error)

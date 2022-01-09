@@ -1,6 +1,6 @@
 import { AssetLink } from "./AssetLink";
-import { AssetSection } from "./AssetSection";
 import { AssetTag } from "./AssetTag";
+import { SectionEntry } from "./SectionEntry";
 
 export interface Asset {
   assetId: number;
@@ -27,6 +27,6 @@ export interface Asset {
   // pctChange30d?: number;
   tags?: AssetTag[];
   competitors?: Asset[];
-  sections?: AssetSection[];
+  sectionEntries?: SectionEntry[];
   links?: AssetLink[];
 }

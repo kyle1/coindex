@@ -13,10 +13,10 @@ namespace Crypto.Entities
             AssetCompetitorCompetitorAssets = new HashSet<AssetCompetitor>();
             AssetEvents = new HashSet<AssetEvent>();
             AssetLinks = new HashSet<AssetLink>();
-            AssetSections = new HashSet<AssetSection>();
             AssetTagXrefs = new HashSet<AssetTagXref>();
             AssetTransactions = new HashSet<AssetTransaction>();
             PortfolioAssets = new HashSet<PortfolioAsset>();
+            SectionEntries = new HashSet<SectionEntry>();
         }
 
         public int AssetId { get; set; }
@@ -29,9 +29,9 @@ namespace Crypto.Entities
         public virtual ICollection<AssetCompetitor> AssetCompetitorCompetitorAssets { get; set; }
         public virtual ICollection<AssetEvent> AssetEvents { get; set; }
         public virtual ICollection<AssetLink> AssetLinks { get; set; }
-        public virtual ICollection<AssetSection> AssetSections { get; set; }
         public virtual ICollection<AssetTagXref> AssetTagXrefs { get; set; }
         public virtual ICollection<AssetTransaction> AssetTransactions { get; set; }
         public virtual ICollection<PortfolioAsset> PortfolioAssets { get; set; }
+        public virtual ICollection<SectionEntry> SectionEntries { get; set; }
     }
 }

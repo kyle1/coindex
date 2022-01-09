@@ -26,14 +26,14 @@ namespace Crypto.Repositories
             var asset = context.Assets
                 .Include(x => x.AssetTagXrefs)
                 .ThenInclude(x => x.AssetTag)
-                .Include(x => x.AssetSections)
-                    .ThenInclude(x => x.SectionCategory)
+                .Include(x => x.SectionEntries)
+                    .ThenInclude(x => x.Section)
                     // .OrderBy(x => x.AssetSections.Select(x => x.SectionCategory.SortOrder))
                 .Include(x => x.AssetLinks)
                 .SingleOrDefault(asset => asset.AssetId == id);
 
             // Not sure how to order the sections in the query above. This will handle it for now.
-            asset.AssetSections = asset.AssetSections.OrderBy(x => x.SectionCategory.SortOrder).ToList();
+            asset.SectionEntries = asset.SectionEntries.OrderBy(x => x.Section.SortOrder).ToList();
 
             return asset;
         }
@@ -41,8 +41,8 @@ namespace Crypto.Repositories
         private void GetAssetComparison(List<int> assetIds)
         {
             var context = new CryptoDbContext();
-            var sections = context.SectionCategories.OrderBy(x => x.SortOrder).ToList();
-            var assetSections = context.AssetSections.Where(x => assetIds.Contains(x.AssetId)).ToList();
+            var sections = context.Sections.OrderBy(x => x.SortOrder).ToList();
+            var sectionEntries = context.SectionEntries.Where(x => assetIds.Contains(x.AssetId)).ToList();
 
             //Format needs to be something like:
             

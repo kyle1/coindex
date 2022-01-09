@@ -22,7 +22,7 @@ namespace Crypto.Dtos
         public List<AssetTagDto> Tags { get; set; }
         //TODO: Consider renaming classes to "AssetSection" and "AssetSectionEntry"
         //public List<SectionCategoryDto> SectionCategories { get; set; }
-        public List<AssetSectionDto> Sections { get; set; }
+        public List<SectionEntryDto> SectionEntries { get; set; }
         public List<AssetLinkDto> Links { get; set; }
     }
 }

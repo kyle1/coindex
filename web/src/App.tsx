@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Portfolio from "./pages/portfolio/Portfolio";
 import Resources from "./pages/resources/Resources";
 import SectionCategories from "./pages/admin/categories/SectionCategories";
+import Test from "./pages/Test";
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -28,6 +29,7 @@ const App: React.FC = () => (
       <Route path="/admin/tags" element={<AssetTagsMaintenance />} />
       <Route path="/admin/assets" element={<AssetsMaintenance />} />
       <Route path="/admin/dyor" element={<Dyor />} />
+      <Route path="/test" element={<Test />} />
     </Routes>
   </BrowserRouter>
 );

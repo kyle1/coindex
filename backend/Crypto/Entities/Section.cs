@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 namespace Crypto.Entities
 {
-    public partial class SectionCategory
+    public partial class Section
     {
-        public SectionCategory()
+        public Section()
         {
-            AssetSections = new HashSet<AssetSection>();
+            SectionEntries = new HashSet<SectionEntry>();
         }
 
-        public int SectionCategoryId { get; set; }
+        public int SectionId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int SortOrder { get; set; }
 
-        public virtual ICollection<AssetSection> AssetSections { get; set; }
+        public virtual ICollection<SectionEntry> SectionEntries { get; set; }
     }
 }

@@ -111,6 +111,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
             <NavLink to="/admin/categories">Section Categories</NavLink>
             <NavLink to="/admin/tags">Tags</NavLink>
             <NavLink to="/admin/dyor">Dyor</NavLink>
+            <NavLink to="/test">Test</NavLink>
           </div>
         </div>
         <div className="navbar-right">

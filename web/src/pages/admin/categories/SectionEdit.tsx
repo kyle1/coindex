@@ -4,7 +4,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import styled from "styled-components";
 import Button from "../../../components/Button";
 import { apiBaseUrl } from "../../../constants";
-import { SectionCategory } from "../../../models/SectionCategory";
+import { Section } from "../../../models/Section";
 
 const Container = styled.div`
   margin: 10px;
@@ -16,7 +16,7 @@ const Footer = styled.div`
 `;
 
 interface SectionEditProps {
-  section: SectionCategory;
+  section: Section;
   onSave: () => void;
   onCancel: () => void;
 }
@@ -28,21 +28,21 @@ const SectionEdit: React.FC<SectionEditProps> = (props: SectionEditProps) => {
 
   const handleSaveClick = (): void => {
     //TODO: validate, then save.
-    const section: SectionCategory = {
-      sectionCategoryId: props.section?.sectionCategoryId ?? 0,
+    const section: Section = {
+      sectionId: props.section?.sectionId ?? 0,
       title: title,
       description: description,
       sortOrder: +sortOrder!,
     };
 
-    if (section.sectionCategoryId === 0) {
+    if (section.sectionId === 0) {
       createSection(section);
     } else {
       updateSection(section);
     }
   };
 
-  const createSection = (section: SectionCategory): void => {
+  const createSection = (section: Section): void => {
     let options: any = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,13 +56,13 @@ const SectionEdit: React.FC<SectionEditProps> = (props: SectionEditProps) => {
       );
   };
 
-  const updateSection = (section: SectionCategory): void => {
+  const updateSection = (section: Section): void => {
     let options: any = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(section),
     };
-    fetch(`${apiBaseUrl}/sections/category/${section.sectionCategoryId}`, options)
+    fetch(`${apiBaseUrl}/sections/${section.sectionId}`, options)
       .then((response) => console.log(response))
       .then(
         () => props.onSave(),

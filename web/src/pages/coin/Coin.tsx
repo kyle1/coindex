@@ -2,17 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AutoComplete } from "primereact/autocomplete";
 import styled from "styled-components";
-import SectionEdit from "./SectionEdit";
+import SectionEdit from "./SectionEntryEdit";
 import Modal from "../../components/Modal";
 import { apiBaseUrl } from "../../constants";
 import { Asset } from "../../models/Asset";
-import { AssetSection } from "../../models/AssetSection";
+import { SectionEntry } from "../../models/SectionEntry";
 import { AssetTag } from "../../models/AssetTag";
 import CoinCalendar from "./calendar/CoinCalendar";
 
 const Container = styled.div`
   margin: 10px;
   font-size: 14px;
+
+  .badge {
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    padding: 0;
+    background: #c298d8;
+    color: #151515;
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+  }
+
   .link {
     color: white;
     text-decoration: none;
@@ -21,8 +36,12 @@ const Container = styled.div`
 
 const OverviewContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 0px 100px;
+
+  p {
+    margin: 0px;
+  }
 `;
 
 interface CoinProps {}
@@ -36,8 +55,8 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
   const [filteredTags, setFilteredTags] = useState<any>(null);
   const [selectedTags, setSelectedTags] = useState<AssetTag[]>([]);
 
-  const [selectedSection, setSelectedSection] = useState<AssetSection>();
-  const [showSectionEdit, setShowSectionEdit] = useState<boolean>(false);
+  const [selectedEntry, setSelectedEntry] = useState<SectionEntry>();
+  const [showEntryEdit, setShowEntryEdit] = useState<boolean>(false);
 
   // const saveAsset = (asset: any) => {
   //   console.log("saving asset...");
@@ -130,14 +149,26 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
     deleteAssetTag(tag);
   };
 
-  const handleSectionEditClick = (section?: AssetSection) => {
-    setSelectedSection(section);
-    setShowSectionEdit(true);
+  const handleEntryEditClick = (entry?: SectionEntry) => {
+    setSelectedEntry(entry);
+    setShowEntryEdit(true);
   };
 
-  const handleSectionSave = () => {
-    setShowSectionEdit(false);
+  const handleEntrySave = () => {
+    setShowEntryEdit(false);
     getAsset(+id!);
+  };
+
+  const getBadgeStyle = (rating: number | undefined) => {
+    if (!rating) return { display: "none" };
+
+    let bg = "white";
+    if (rating === 1) bg = "red";
+    else if (rating === 2) bg = "orange";
+    else if (rating === 3) bg = "yellow";
+    else if (rating === 4) bg = "lightgreen";
+    else bg = "forestgreen";
+    return { background: bg };
   };
 
   useEffect(() => {
@@ -147,13 +178,13 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
 
   return (
     <>
-      {showSectionEdit && (
-        <Modal onConfirm={() => {}} onClose={() => setShowSectionEdit(false)}>
+      {showEntryEdit && (
+        <Modal onConfirm={() => {}} onClose={() => setShowEntryEdit(false)}>
           <SectionEdit
             assetId={+id!}
-            section={selectedSection!}
-            onSave={handleSectionSave}
-            onCancel={() => setShowSectionEdit(false)}
+            entry={selectedEntry!}
+            onSave={handleEntrySave}
+            onCancel={() => setShowEntryEdit(false)}
           />
         </Modal>
       )}
@@ -192,24 +223,25 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
               <i
                 className="fas fa-plus"
                 style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
-                onClick={() => handleSectionEditClick(undefined)}
+                onClick={() => handleEntryEditClick(undefined)}
               ></i>
             </div>
             <OverviewContainer>
-              {asset!.sections?.map((section) => (
+              {asset!.sectionEntries?.map((entry) => (
                 <div>
-                  <div
-                    style={{ fontWeight: "bold" }}
-                    onClick={() => handleSectionEditClick(section)}
-                  >
-                    {section.sectionCategory!.title}
-                    <i
-                      className="fas fa-pencil-alt"
-                      style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
-                      // onClick={() => handleSectionEditClick(section)}
-                    ></i>
+                  <div style={{ fontWeight: "bold" }} onClick={() => handleEntryEditClick(entry)}>
+                    <span style={{ marginRight: "5px" }}>{entry.section!.title}</span>
+                    {/* {[...Array(entry.rating ?? 0)].map((e, i) => (
+                      <i
+                        className="fas fa-star"
+                        style={{ color: "#FFDF00", fontSize: "12px", paddingLeft: "5px" }}
+                      />
+                    ))} */}
+                    <span className="badge" style={getBadgeStyle(entry.rating)}>
+                      {entry.rating}
+                    </span>
                   </div>
-                  <div>{section.body}</div>
+                  <div dangerouslySetInnerHTML={{ __html: entry.body }}></div>
                   <br />
                 </div>
               ))}

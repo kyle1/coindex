@@ -21,7 +21,6 @@ namespace Crypto.Entities
         public virtual DbSet<AssetCompetitor> AssetCompetitors { get; set; }
         public virtual DbSet<AssetEvent> AssetEvents { get; set; }
         public virtual DbSet<AssetLink> AssetLinks { get; set; }
-        public virtual DbSet<AssetSection> AssetSections { get; set; }
         public virtual DbSet<AssetTag> AssetTags { get; set; }
         public virtual DbSet<AssetTagCategory> AssetTagCategories { get; set; }
         public virtual DbSet<AssetTagXref> AssetTagXrefs { get; set; }
@@ -29,7 +28,8 @@ namespace Crypto.Entities
         public virtual DbSet<PortfolioAsset> PortfolioAssets { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceGroup> ResourceGroups { get; set; }
-        public virtual DbSet<SectionCategory> SectionCategories { get; set; }
+        public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<SectionEntry> SectionEntries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -142,35 +142,6 @@ namespace Crypto.Entities
                     .HasForeignKey(d => d.AssetId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("asset_link_asset_id_fkey");
-            });
-
-            modelBuilder.Entity<AssetSection>(entity =>
-            {
-                entity.ToTable("asset_section");
-
-                entity.Property(e => e.AssetSectionId).HasColumnName("asset_section_id");
-
-                entity.Property(e => e.AssetId).HasColumnName("asset_id");
-
-                entity.Property(e => e.Body)
-                    .IsRequired()
-                    .HasColumnName("body");
-
-                entity.Property(e => e.Rating).HasColumnName("rating");
-
-                entity.Property(e => e.SectionCategoryId).HasColumnName("section_category_id");
-
-                entity.HasOne(d => d.Asset)
-                    .WithMany(p => p.AssetSections)
-                    .HasForeignKey(d => d.AssetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("asset_section_asset_id_fkey");
-
-                entity.HasOne(d => d.SectionCategory)
-                    .WithMany(p => p.AssetSections)
-                    .HasForeignKey(d => d.SectionCategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("asset_section_section_category_id_fkey");
             });
 
             modelBuilder.Entity<AssetTag>(entity =>
@@ -318,11 +289,11 @@ namespace Crypto.Entities
                     .HasColumnName("group_name");
             });
 
-            modelBuilder.Entity<SectionCategory>(entity =>
+            modelBuilder.Entity<Section>(entity =>
             {
-                entity.ToTable("section_category");
+                entity.ToTable("section");
 
-                entity.Property(e => e.SectionCategoryId).HasColumnName("section_category_id");
+                entity.Property(e => e.SectionId).HasColumnName("section_id");
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
@@ -331,6 +302,35 @@ namespace Crypto.Entities
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasColumnName("title");
+            });
+
+            modelBuilder.Entity<SectionEntry>(entity =>
+            {
+                entity.ToTable("section_entry");
+
+                entity.Property(e => e.SectionEntryId).HasColumnName("section_entry_id");
+
+                entity.Property(e => e.AssetId).HasColumnName("asset_id");
+
+                entity.Property(e => e.Body)
+                    .IsRequired()
+                    .HasColumnName("body");
+
+                entity.Property(e => e.Rating).HasColumnName("rating");
+
+                entity.Property(e => e.SectionId).HasColumnName("section_id");
+
+                entity.HasOne(d => d.Asset)
+                    .WithMany(p => p.SectionEntries)
+                    .HasForeignKey(d => d.AssetId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("section_entry_asset_id_fkey");
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.SectionEntries)
+                    .HasForeignKey(d => d.SectionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("section_entry_section_id_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);

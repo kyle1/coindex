@@ -39,7 +39,7 @@ namespace Crypto
                 Website = asset.Website,
                 Subreddit = asset.Subreddit,
                 Tags = asset.AssetTagXrefs.ToList().Select(x => x.AssetTag.AsDto()).ToList(),
-                Sections = asset.AssetSections.Select(x => x.AsDto()).ToList(),
+                SectionEntries = asset.SectionEntries.Select(x => x.AsDto()).ToList(),
                 Links = asset.AssetLinks.Select(x => x.AsDto()).ToList()
             };
         }
@@ -64,15 +64,15 @@ namespace Crypto
             };
         }
 
-        public static AssetSectionDto AsDto(this AssetSection section)
+        public static SectionEntryDto AsDto(this SectionEntry entry)
         {
-            return new AssetSectionDto
+            return new SectionEntryDto
             {
-                AssetSectionId = section.AssetSectionId,
-                AssetId = section.AssetId,
-                Body = section.Body,
-                Rating = section.Rating,
-                SectionCategory = section.SectionCategory != null ? section.SectionCategory.AsDto() : null
+                SectionEntryId = entry.SectionEntryId,
+                AssetId = entry.AssetId,
+                Body = entry.Body,
+                Rating = entry.Rating,
+                Section = entry.Section != null ? entry.Section.AsDto() : null
             };
         }
 
@@ -100,14 +100,14 @@ namespace Crypto
             };
         }
 
-        public static SectionCategoryDto AsDto(this SectionCategory category)
+        public static SectionDto AsDto(this Section section)
         {
-            return new SectionCategoryDto
+            return new SectionDto
             {
-                SectionCategoryId = category.SectionCategoryId,
-                Title = category.Title,
-                Description = category.Description,
-                SortOrder = category.SortOrder
+                SectionId = section.SectionId,
+                Title = section.Title,
+                Description = section.Description,
+                SortOrder = section.SortOrder
             };
         }
     }

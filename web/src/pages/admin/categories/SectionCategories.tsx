@@ -6,7 +6,7 @@ import SectionEdit from "./SectionEdit";
 import Button from "../../../components/Button";
 import Modal from "../../../components/Modal";
 import { apiBaseUrl } from "../../../constants";
-import { SectionCategory } from "../../../models/SectionCategory";
+import { Section } from "../../../models/Section";
 
 const Container = styled.div`
   margin: 10px;
@@ -22,14 +22,14 @@ interface SectionCategoriesProps {}
 
 const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCategoriesProps) => {
   const [showSectionEdit, setShowSectionEdit] = useState<boolean>(false);
-  const [sectionCategories, setSectionCategories] = useState<SectionCategory[]>([]);
-  const [selectedSection, setSelectedSection] = useState<SectionCategory | null>();
+  const [sections, setSections] = useState<Section[]>([]);
+  const [selectedSection, setSelectedSection] = useState<Section | null>();
 
-  const getSectionCategories = (): void => {
-    fetch(`${apiBaseUrl}/sections/categories`)
+  const getSections = (): void => {
+    fetch(`${apiBaseUrl}/sections`)
       .then((response) => response.json())
       .then(
-        (categories: SectionCategory[]) => setSectionCategories(categories),
+        (categories: Section[]) => setSections(categories),
         (error) => console.log(error)
       );
   };
@@ -38,14 +38,14 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
     setSelectedSection(null);
     setShowSectionEdit(true);
   };
-  const handleEditClick = (section: SectionCategory): void => {
+  const handleEditClick = (section: Section): void => {
     setSelectedSection(section);
     setShowSectionEdit(true);
   };
 
-  const handleCategorySave = (): void => {
+  const handleSectionSave = (): void => {
     setShowSectionEdit(false);
-    getSectionCategories();
+    getSections();
   };
 
   const header: JSX.Element = (
@@ -57,19 +57,19 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
     </Heading>
   );
 
-  const editTemplate = (section: SectionCategory): JSX.Element => (
+  const editTemplate = (section: Section): JSX.Element => (
     <Button onClick={() => handleEditClick(section)}>
       <i className="fas fa-pencil-alt" />
     </Button>
   );
 
-  const deleteTemplate = (section: SectionCategory): JSX.Element => (
+  const deleteTemplate = (section: Section): JSX.Element => (
     <Button onClick={() => console.log("TODO: delete")}>
       <i className="fas fa-trash" />
     </Button>
   );
 
-  useEffect(() => getSectionCategories(), []);
+  useEffect(() => getSections(), []);
 
   return (
     <>
@@ -77,7 +77,7 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
         <Modal onConfirm={() => {}} onClose={() => setShowSectionEdit(false)}>
           <SectionEdit
             section={selectedSection!}
-            onSave={handleCategorySave}
+            onSave={handleSectionSave}
             onCancel={() => setShowSectionEdit(false)}
           />
         </Modal>
@@ -85,7 +85,7 @@ const SectionCategories: React.FC<SectionCategoriesProps> = (props: SectionCateg
       {!showSectionEdit && (
         <Container>
           <DataTable
-            value={sectionCategories}
+            value={sections}
             //size="small"
             className="p-datatable-sm editable-cells-table"
             header={header}

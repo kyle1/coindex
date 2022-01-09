@@ -62,7 +62,7 @@ namespace Crypto
             services.AddSingleton<IResourcesRepository, ResourcesRepository>();
             services.AddSingleton<IAssetsRepository, AssetsRepository>();
             services.AddSingleton<IAssetTagsRepository, AssetTagsRepository>();
-            services.AddSingleton<IAssetSectionsRepository, AssetSectionsRepository>();
+            services.AddSingleton<ISectionsRepository, SectionsRepository>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
