@@ -150,6 +150,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
   };
 
   const handleEntryEditClick = (entry?: SectionEntry) => {
+    console.log(entry);
     setSelectedEntry(entry);
     setShowEntryEdit(true);
   };

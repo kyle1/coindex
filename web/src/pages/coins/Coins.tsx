@@ -230,13 +230,7 @@ const Coins: React.FC<CoinsProps> = (props: CoinsProps) => {
               sortable
               body={subredditTemplate}
             /> */}
-        <Column
-          header="Links"
-          headerStyle={{ width: "300px" }}
-          //filter
-          //sortable
-          body={linksTemplate}
-        />
+        <Column header="Links" headerStyle={{ width: "300px" }} body={linksTemplate} />
       </DataTable>
     </Container>
   );

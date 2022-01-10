@@ -163,14 +163,8 @@ const AssetsMaintenance: React.FC<AssetsMaintenanceProps> = (props: AssetsMainte
               body={assetTemplate}
             />
             <Column field="ticker" header="Ticker" headerStyle={{ width: "300px" }} sortable />
-            <Column
-              header="Links"
-              headerStyle={{ width: "300px" }}
-              //filter
-              //sortable
-              body={linksTemplate}
-            />
-            <Column header="" body={actionBodyTemplate} sortable />
+            <Column header="Links" headerStyle={{ width: "300px" }} body={linksTemplate} />
+            <Column body={actionBodyTemplate} sortable />
           </DataTable>
         </Container>
       )}

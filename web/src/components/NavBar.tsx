@@ -94,8 +94,8 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </NavLink>
         </div>
         <div className="navbar-pages">
+          <NavLink to="/dashboard">Dashboard</NavLink>
           <NavLink to="/coins">Coins</NavLink>
-          <NavLink to="/resources">Resources</NavLink>
           <NavLink to="/portfolio">Portfolio</NavLink>
           <NavLink to="/events">Events</NavLink>
           <NavLink to="/compare">Compare</NavLink>
@@ -108,6 +108,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
           </button>
           <div className="dropdown-content">
             <NavLink to="/admin/assets">Assets</NavLink>
+            <NavLink to="/admin/resources">Resources</NavLink>
             <NavLink to="/admin/sections">Sections</NavLink>
             <NavLink to="/admin/tags">Tags</NavLink>
             <NavLink to="/admin/dyor">Dyor</NavLink>

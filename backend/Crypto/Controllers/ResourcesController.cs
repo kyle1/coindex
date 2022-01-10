@@ -16,9 +16,9 @@ namespace Crypto.Controllers
         public ResourcesController(IResourcesRepository repository) => this.repository = repository;
 
         [HttpGet("groups")]
-        public IEnumerable<ResourceDto> GetResourceGroups()
+        public IEnumerable<ResourceGroupDto> GetResourceGroups()
         {
-            var groups = repository.GetResources().Select(x => x.AsDto());
+            var groups = repository.GetResourceGroups().Select(x => x.AsDto());
             return groups;
         }
 

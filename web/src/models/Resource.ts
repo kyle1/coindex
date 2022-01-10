@@ -7,5 +7,5 @@ export interface Resource {
   url: string;
   description?: string;
 
-  resourceGroup: ResourceGroup;
+  resourceGroup?: ResourceGroup;
 }

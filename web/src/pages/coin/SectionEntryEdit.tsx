@@ -31,21 +31,13 @@ const SectionEntryEdit: React.FC<SectionEntryEditProps> = (props: SectionEntryEd
   const [entryBody, setEntryBody] = useState<any>(props.entry?.body);
   const [rating, setRating] = useState<number | undefined>(props.entry?.rating);
 
-  const handleSaveClick = (): void => {
-    //TODO: validate, then save.
-    let entry: SectionEntry = {
-      sectionEntryId: props.entry?.sectionEntryId ?? 0,
-      assetId: props.assetId,
-      sectionId: selectedSection!.sectionId,
-      body: entryBody,
-      rating: rating,
-    };
-
-    if (entry.sectionEntryId === 0) {
-      createSectionEntry(entry);
-    } else {
-      updateSectionEntry(entry);
-    }
+  const getSections = (): void => {
+    fetch(`${apiBaseUrl}/sections`)
+      .then((response) => response.json())
+      .then(
+        (sections: Section[]) => setSections(sections),
+        (error) => console.log(error)
+      );
   };
 
   const createSectionEntry = (section: SectionEntry): void => {
@@ -76,13 +68,21 @@ const SectionEntryEdit: React.FC<SectionEntryEditProps> = (props: SectionEntryEd
       );
   };
 
-  const getSections = (): void => {
-    fetch(`${apiBaseUrl}/sections`)
-      .then((response) => response.json())
-      .then(
-        (sections: Section[]) => setSections(sections),
-        (error) => console.log(error)
-      );
+  const handleSaveClick = (): void => {
+    //TODO: validate, then save.
+    let entry: SectionEntry = {
+      sectionEntryId: props.entry?.sectionEntryId ?? 0,
+      assetId: props.assetId,
+      sectionId: selectedSection!.sectionId,
+      body: entryBody,
+      rating: rating,
+    };
+
+    if (entry.sectionEntryId === 0) {
+      createSectionEntry(entry);
+    } else {
+      updateSectionEntry(entry);
+    }
   };
 
   useEffect(() => getSections(), []);
@@ -100,12 +100,6 @@ const SectionEntryEdit: React.FC<SectionEntryEditProps> = (props: SectionEntryEd
       />
       <br />
       <br />
-      {/* <InputTextarea
-        rows={10}
-        value={sectionBody}
-        onChange={(e) => setSectionBody(e.target.value)}
-        style={{ width: "100%" }}
-      /> */}
       <Editor
         style={{ height: "320px" }}
         value={entryBody}
@@ -113,12 +107,6 @@ const SectionEntryEdit: React.FC<SectionEntryEditProps> = (props: SectionEntryEd
       />
       <br />
       Rating:
-      {/* <InputText
-        type="number"
-        value={rating}
-        style={{ width: "80px" }}
-        onChange={(e) => setRating(+e.target.value)}
-      ></InputText> */}
       <span style={{ paddingLeft: "10px" }}>
         {[...Array(5)].map((e, i) => (
           <i
