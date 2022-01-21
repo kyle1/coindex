@@ -25,6 +25,7 @@ namespace Crypto
                 ResourceGroupId = resource.ResourceGroupId,
                 Url = resource.Url,
                 Description = resource.Description,
+                ShowInDashboard = resource.ShowInDashboard,
                 ResourceGroup = resource.ResourceGroup != null ? resource.ResourceGroup.AsDto() : null
             };
         }

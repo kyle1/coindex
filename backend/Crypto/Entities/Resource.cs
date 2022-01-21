@@ -12,6 +12,7 @@ namespace Crypto.Entities
         public int ResourceGroupId { get; set; }
         public string Url { get; set; }
         public string Description { get; set; }
+        public bool ShowInDashboard { get; set; }
 
         public virtual ResourceGroup ResourceGroup { get; set; }
     }

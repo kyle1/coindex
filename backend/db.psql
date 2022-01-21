@@ -19,30 +19,31 @@ CREATE TABLE IF NOT EXISTS resource (
 	resource_name			text NOT NULL,
 	resource_group_id		int NOT NULL REFERENCES resource_group (resource_group_id),
 	url						text NOT NULL,
-	description				text
+	description				text,
+	show_in_dashboard		boolean NOT NULL
 );
 
-INSERT INTO resource (resource_name, resource_group_id, url, description)
+INSERT INTO resource (resource_name, resource_group_id, url, description, show_in_dashboard)
 VALUES
-('Decrypt', 1, 'https://decrypt.co/', 'Your guide to Bitcoin, Ethereum & Web 3.0'),
-('Cointelegraph', 1, 'https://cointelegraph.com/', 'Bitcoin, Ethereum, Crypto News & Price Indexes'),
-('U Today', 1, 'https://u.today/', 'IT, AI and Fintech Daily News for You Today'),
-('CryptoPanic', 1, 'https://cryptopanic.com/', 'News aggregator platform indicating impact on price and market for traders and cryptocurrency enthusiasts'),
-('Messari', 1, 'https://messari.io/news', 'Real-Time Crypto News Aggregator'),
-('CoinMarketCap', 2, 'https://coinmarketcap.com/', 'Cryptocurrency Prices, Charts And Market Capitalizations'),
-('Messari', 2, 'https://messari.io/', 'Crypto Research, Data, and Tools'),
-('CoinGecko', 2, 'https://www.coingecko.com/en', 'Cryptocurrency Prices, Charts, and Crypto Market Cap'),
-('Glassnode', 2, 'https://glassnode.com/', 'On-chain market intelligence'),
-('CoinDance', 2, 'https://coin.dance/', 'Community-driven Bitcoin statistics and services.'),
-('CoinMarketCal', 3, 'https://coinmarketcal.com/en/', 'Cryptocurrency Calendar'),
-('CryptoPanic', 4, 'https://cryptopanic.com/developers/api/', 'CryptoPanic is providing free JSON API of recent posts and indicators.'),
-('Trading bot', 5, 'https://www.reddit.com/r/CryptoCurrency/comments/ruep0r/finally_did_it_i_made_a_crypto_trading_bot_that/', 'Automatically place orders on new listings before added to Binance or KuCoin'),
-('Route 2 FI', 6, 'https://twitter.com/Route2FI', 'DeFi, web3, and financial freedom'),
-('Jack Niewold', 6, 'https://twitter.com/JackNiewold', 'Altcoins'),
-('Andrew Kang', 6, 'https://twitter.com/Rewkang', 'General crypto'),
-('Cryptoyieldinfo', 6, 'https://twitter.com/Cryptoyieldinfo', 'Defi'),
-('DeFi Dad', 6, 'https://twitter.com/DeFi_Dad', 'DeFi super-user / educator'),
-('rektdiomedes', 6, 'https://twitter.com/rektdiomedes', 'Full-time yield farmer. Defi analysis');
+('Decrypt', 1, 'https://decrypt.co/', 'Your guide to Bitcoin, Ethereum & Web 3.0', TRUE),
+('Cointelegraph', 1, 'https://cointelegraph.com/', 'Bitcoin, Ethereum, Crypto News & Price Indexes', TRUE),
+('U Today', 1, 'https://u.today/', 'IT, AI and Fintech Daily News for You Today', FALSE),
+('CryptoPanic', 1, 'https://cryptopanic.com/', 'News aggregator platform indicating impact on price and market for traders and cryptocurrency enthusiasts', TRUE),
+('Messari', 1, 'https://messari.io/news', 'Real-Time Crypto News Aggregator', FALSE),
+('CoinMarketCap', 2, 'https://coinmarketcap.com/', 'Cryptocurrency Prices, Charts And Market Capitalizations', FALSE),
+('Messari', 2, 'https://messari.io/', 'Crypto Research, Data, and Tools', FALSE),
+('CoinGecko', 2, 'https://www.coingecko.com/en', 'Cryptocurrency Prices, Charts, and Crypto Market Cap', FALSE),
+('Glassnode', 2, 'https://glassnode.com/', 'On-chain market intelligence', FALSE),
+('CoinDance', 2, 'https://coin.dance/', 'Community-driven Bitcoin statistics and services.', FALSE),
+('CoinMarketCal', 3, 'https://coinmarketcal.com/en/', 'Cryptocurrency Calendar', FALSE),
+('CryptoPanic', 4, 'https://cryptopanic.com/developers/api/', 'CryptoPanic is providing free JSON API of recent posts and indicators.', FALSE),
+('Trading bot', 5, 'https://www.reddit.com/r/CryptoCurrency/comments/ruep0r/finally_did_it_i_made_a_crypto_trading_bot_that/', 'Automatically place orders on new listings before added to Binance or KuCoin', FALSE),
+('Route 2 FI', 6, 'https://twitter.com/Route2FI', 'DeFi, web3, and financial freedom', TRUE),
+('Jack Niewold', 6, 'https://twitter.com/JackNiewold', 'Altcoins', TRUE),
+('Andrew Kang', 6, 'https://twitter.com/Rewkang', 'General crypto', TRUE),
+('Cryptoyieldinfo', 6, 'https://twitter.com/Cryptoyieldinfo', 'Defi', FALSE),
+('DeFi Dad', 6, 'https://twitter.com/DeFi_Dad', 'DeFi super-user / educator', FALSE),
+('rektdiomedes', 6, 'https://twitter.com/rektdiomedes', 'Full-time yield farmer. Defi analysis', FALSE);
 
 
 
@@ -148,7 +149,11 @@ VALUES
 ('Social', NULL, 19),
 ('Competition', NULL, 20),
 ('Analysts', 'Article writers, reddit posters, etc. who are dialed-in to the project', 21),
-('Useful links', 'Relevant websites, articles, reddit posts/comments, etc.', 22);
+('Useful links', 'Relevant websites, articles, reddit posts/comments, etc.', 22),
+--Key takeaways
+('Pros', 'Pros', 23),
+('Cons', 'Cons', 24),
+('Notes', 'Notes', 25);
 
 
 CREATE TABLE IF NOT EXISTS section_entry (

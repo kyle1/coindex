@@ -19,6 +19,7 @@ const App: React.FC = () => (
     <NavBar loggedIn={false} onLoginClick={() => {}} onLogoutClick={() => {}} />
     <Routes>
       <Route path="/" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/coins" element={<Coins />} />
       <Route path="/coins/:id" element={<Coin />} />
       <Route path="/portfolio" element={<Portfolio />} />

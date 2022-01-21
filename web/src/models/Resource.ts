@@ -6,6 +6,7 @@ export interface Resource {
   resourceGroupId: number;
   url: string;
   description?: string;
+  showInDashboard: boolean;
 
   resourceGroup?: ResourceGroup;
 }

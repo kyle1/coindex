@@ -9,10 +9,31 @@ import { Asset } from "../../models/Asset";
 import { SectionEntry } from "../../models/SectionEntry";
 import { AssetTag } from "../../models/AssetTag";
 import CoinCalendar from "./calendar/CoinCalendar";
+import ScrollPanel from "primereact/scrollpanel";
 
 const Container = styled.div`
   margin: 10px;
-  font-size: 14px;
+  font-size: 12px;
+
+  .p-autocomplete .p-autocomplete-multiple-container {
+    padding: 0;
+  }
+
+  .p-autocomplete ul {
+    margin-block-start: 0px;
+    margin-inline-start: 5px;
+    padding-inline-start: 15px;
+  }
+
+  .p-autocomplete-multiple-container {
+    height: 30px;
+    /* padding: 0; */
+  }
+
+  .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-token {
+    height: 20px;
+    font-size: 12px;
+  }
 
   .badge {
     display: inline-block;
@@ -23,11 +44,19 @@ const Container = styled.div`
     color: #151515;
     font-size: 0.75rem;
     font-weight: 700;
-    min-width: 1.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    min-width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
   }
 
+  a {
+    color: white;
+  }
+  ul {
+    margin-block-start: 5px;
+    margin-inline-start: 5px;
+    padding-inline-start: 15px;
+  }
   .link {
     color: white;
     text-decoration: none;
@@ -37,11 +66,36 @@ const Container = styled.div`
 const OverviewContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 0px 100px;
+  grid-gap: 10px;
 
   p {
     margin: 0px;
   }
+`;
+
+const StyledCard = styled.div`
+  /* display: flex;
+  place-self: center;
+  border-top-width: 8px;
+  border-top-color: #435971;
+  border-radius: 0.25rem;
+  background-color: rgb(25, 25, 25);
+  color: var(--primary-text) !important;
+  width: 450px; */
+  background: rgb(20, 20, 20);
+  color: rgba(255, 255, 255, 0.87);
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
+  border-radius: 5px;
+  padding: 5px;
+`;
+
+const StyledCardBody = styled.div`
+  flex: 1 1 auto;
+  min-height: 1px;
+  //padding: 1.25rem;
+  height: 100px;
+  overflow-y: auto;
 `;
 
 interface CoinProps {}
@@ -93,6 +147,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
       .then(
         (asset: Asset) => {
           console.log(asset);
+          document.title = asset.assetName;
           setAsset(asset);
           setSelectedTags(asset.tags!);
         },
@@ -192,44 +247,52 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
       <Container>
         {asset && (
           <>
-            <h3>
-              <img src={`/images/assets/${asset.ticker}.png`} style={{ width: "25px" }} />
-              {asset!.assetName} ({asset!.ticker})
-            </h3>
-            <b>Website:</b>&nbsp;
-            <a href={asset!.website} className="link">
-              {asset!.website}
-            </a>
-            <br />
-            <b>Subreddit:</b>&nbsp;
-            <a href={`https://reddit.com/${asset!.subreddit}`} className="link">
-              {asset!.subreddit}
-            </a>
-            <br />
-            <br />
-            <AutoComplete
-              value={selectedTags}
-              suggestions={filteredTags}
-              completeMethod={searchTag}
-              field="tagName"
-              multiple
-              onChange={(e) => setSelectedTags(e.value)}
-              onSelect={(e) => handleTagSelect(e.value)}
-              onUnselect={(e) => handleTagUnselect(e.value)}
-            />
-            <br />
-            <br />
-            <div style={{ marginBottom: "15px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div>
+                <div style={{ marginBottom: "10px", fontSize: "1.1rem", fontWeight: "bold" }}>
+                  <img src={`/images/assets/${asset.ticker}.png`} style={{ width: "25px" }} />
+                  {asset!.assetName} ({asset!.ticker})
+                  <i
+                    className="fas fa-plus"
+                    style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
+                    onClick={() => handleEntryEditClick(undefined)}
+                  ></i>
+                </div>
+                {/* <b>Website:</b>&nbsp;
+                <a href={asset!.website} className="link">
+                  {asset!.website}
+                </a>
+                <br />
+                <b>Subreddit:</b>&nbsp;
+                <a href={`https://reddit.com/${asset!.subreddit}`} className="link">
+                  {asset!.subreddit}
+                </a> */}
+              </div>
+              <div>
+                Tags:
+                <AutoComplete
+                  value={selectedTags}
+                  suggestions={filteredTags}
+                  completeMethod={searchTag}
+                  field="tagName"
+                  multiple
+                  onChange={(e) => setSelectedTags(e.value)}
+                  onSelect={(e) => handleTagSelect(e.value)}
+                  onUnselect={(e) => handleTagUnselect(e.value)}
+                />
+              </div>
+            </div>
+            {/* <div style={{ marginBottom: "15px" }}>
               <span style={{ fontSize: "20px", fontWeight: "bold" }}>Overview</span>
               <i
                 className="fas fa-plus"
                 style={{ fontSize: "10px", paddingLeft: "10px", cursor: "pointer" }}
                 onClick={() => handleEntryEditClick(undefined)}
               ></i>
-            </div>
+            </div> */}
             <OverviewContainer>
               {asset!.sectionEntries?.map((entry) => (
-                <div>
+                <StyledCard>
                   <div style={{ fontWeight: "bold" }} onClick={() => handleEntryEditClick(entry)}>
                     <span style={{ marginRight: "5px" }}>{entry.section!.title}</span>
                     {/* {[...Array(entry.rating ?? 0)].map((e, i) => (
@@ -242,11 +305,12 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
                       {entry.rating}
                     </span>
                   </div>
-                  <div dangerouslySetInnerHTML={{ __html: entry.body }}></div>
+                  <StyledCardBody dangerouslySetInnerHTML={{ __html: entry.body }}></StyledCardBody>
+
                   <br />
-                </div>
+                </StyledCard>
               ))}
-              <br />
+              {/* <br />
               <br />
               {asset.links && asset!.links.length > 0 && (
                 <div style={{ fontWeight: "bold" }}>Links</div>
@@ -259,7 +323,7 @@ const Coin: React.FC<CoinProps> = (props: CoinProps) => {
                 >
                   {link.description}
                 </a>
-              ))}
+              ))} */}
             </OverviewContainer>
           </>
         )}

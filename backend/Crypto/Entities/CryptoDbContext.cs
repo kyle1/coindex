@@ -265,6 +265,8 @@ namespace Crypto.Entities
                     .IsRequired()
                     .HasColumnName("resource_name");
 
+                entity.Property(e => e.ShowInDashboard).HasColumnName("show_in_dashboard");
+
                 entity.Property(e => e.Url)
                     .IsRequired()
                     .HasColumnName("url");

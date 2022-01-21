@@ -8,6 +8,7 @@ namespace Crypto.Dtos
         public string ResourceName { get; init; }
         public string Url { get; init; }
         public string Description { get; init; }
+        public bool ShowInDashboard { get; init; }
 
         public ResourceGroupDto ResourceGroup { get; init; }
     }
